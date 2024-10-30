@@ -1,24 +1,32 @@
+interface ClientOptions {
+  apiKey: string;
 
-interface HashnodeSDKClientOptions {
-    apiKey: string;
-    baseUrl: string;
+  baseUrl: string;
 }
 
+/**
+ * Represents a client for interacting with the Hashnode API.
+ */
 export class HashnodeSDKClient {
-    private readonly apiKey: string;
-    private readonly baseUrl: string;
+  /**
+   * The API key used for authenticating requests to the Hashnode API.
+   */
+  private readonly apiKey: string;
 
-    constructor({
-        apiKey,
-        baseUrl
-    }: HashnodeSDKClientOptions) {
-        this.apiKey = apiKey;
-        this.baseUrl = baseUrl;
-    }
+  /**
+   * The base URL for the Hashnode API.
+   */
+  private readonly baseUrl: string;
 
-    logger(message: string) {
-        console.log(message);
-    }
-
+  /**
+   * Creates an instance of HashnodeSDKClient.
+   *
+   * @param options - The options for configuring the client.
+   * @param options.apiKey - The API key used for authenticating requests.
+   * @param options.baseUrl - The base URL for the Hashnode API.
+   */
+  constructor({ apiKey, baseUrl }: ClientOptions) {
+    this.apiKey = apiKey;
+    this.baseUrl = baseUrl;
+  }
 }
-

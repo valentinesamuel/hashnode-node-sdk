@@ -1,5 +1,11 @@
 # hashnode-node-sdk
 
+## 1.1.2
+
+### Patch Changes
+
+- 0f2c31d: Added graphql-request mains
+
 ## 1.1.1
 
 ### Patch Changes

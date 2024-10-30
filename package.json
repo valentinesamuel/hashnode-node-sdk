@@ -1,20 +1,20 @@
 {
-  "name": "hashnode-sdk",
+  "name": "hashnode-node-sdk",
   "version": "1.0.0",
   "description": "A javascript sdk for working with hasnode graphql api",
   "keywords": [
     "hashnode",
-    "hashnode-sdk",
+    "hashnode-node-sdk",
     "typescript"
   ],
-  "homepage": "https://github.com/valentinesamuel/hashnode-sdk",
+  "homepage": "https://github.com/valentinesamuel/hashnode-node-sdk",
   "bugs": {
-    "url": "https://github.com/valentinesamuel/hashnode-sdk/issues"
+    "url": "https://github.com/valentinesamuel/hashnode-node-sdk/issues"
   },
   "author": "Valentine Samuel",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/valentinesamuel/hashnode-sdk.git"
+    "url": "git+https://github.com/valentinesamuel/hashnode-node-sdk.git"
   },
   "files": [
     "dist"

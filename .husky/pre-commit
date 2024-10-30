@@ -1,2 +1,2 @@
 # Run npm ci and fail if it does not complete successfully
-npm ci || exit 1
+npm run format && npm ci || exit 1

@@ -1,0 +1,5 @@
+export const LibConfig = {
+    HASHNODE_API_ENDPOINT: process.env.HASHNODE_BASE_URL,
+    HASHNODE_API_TOKEN: process.env.HASHNODE_TOKEN,
+    HASHNODE_PUBLICATION_ID: process.env.HASHNODE_PUBLICATION_ID,
+}

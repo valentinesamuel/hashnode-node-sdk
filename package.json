@@ -51,5 +51,8 @@
       "import": "./dist/index.js",
       "default": "./dist/index.cjs"
     }
+  },
+  "dependencies": {
+    "graphql-request": "^7.1.0"
   }
 }

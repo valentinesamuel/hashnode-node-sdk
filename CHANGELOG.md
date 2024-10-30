@@ -1,5 +1,11 @@
 # hashnode-node-sdk
 
+## 1.1.1
+
+### Patch Changes
+
+- df7f6c3: moved request to client class
+
 ## 1.1.3
 
 ### Patch Changes

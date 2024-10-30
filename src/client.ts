@@ -25,7 +25,6 @@ export class HashnodeSDKClient {
 
   public readonly userManager: UserManager;
 
-
   /**
    * Creates an instance of HashnodeSDKClient.
    *

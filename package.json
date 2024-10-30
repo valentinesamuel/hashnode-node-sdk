@@ -1,0 +1,55 @@
+{
+  "name": "hashnode-sdk",
+  "version": "1.0.0",
+  "description": "A javascript sdk for working with hasnode graphql api",
+  "keywords": [
+    "hashnode",
+    "hashnode-sdk",
+    "typescript"
+  ],
+  "homepage": "https://github.com/valentinesamuel/hashnode-sdk",
+  "bugs": {
+    "url": "https://github.com/valentinesamuel/hashnode-sdk/issues"
+  },
+  "author": "Valentine Samuel",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/valentinesamuel/hashnode-sdk.git"
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.16.4",
+    "@changesets/cli": "^2.27.9",
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
+    "prettier": "^3.3.3",
+    "tsup": "^8.3.5",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.4"
+  },
+  "scripts": {
+    "prepare": "husky",
+    "build": "tsup",
+    "format": "prettier --write .",
+    "check-format": "prettier --check .",
+    "check-exports": "attw --pack . --ignore-rules=cjs-resolves-to-esm",
+    "lint": "tsc",
+    "ci": "npm run build && npm run check-format && npm run check-exports && npm run lint && npm run test",
+    "test": "vitest run",
+    "dev": "vitest",
+    "local-release": "changeset version && changeset publish",
+    "prepublishOnly": "npm run ci"
+  },
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "import": "./dist/index.js",
+      "default": "./dist/index.cjs"
+    }
+  }
+}

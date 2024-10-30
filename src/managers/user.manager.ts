@@ -1,17 +1,15 @@
-import type { HashnodeSDKClient } from "../client";
-import gqlRequest from "../utils/request";
+import type { HashnodeSDKClient } from '../client';
 
 export class UserManager {
-   
-    constructor(client: HashnodeSDKClient) {
-        console.log('UserManager created');
+  private readonly client: HashnodeSDKClient;
+  constructor(client: HashnodeSDKClient) {
+    console.log('UserManager created');
+    this.client = client;
+  }
 
-    }
-
-
-    getUser(username: string) {
-        const res = gqlRequest({
-            query: `
+  getUser(username: string) {
+    const res = this.client._request({
+      query: `
             query GetUserById($input: String!) {
                 user(username: $input) {
                     id
@@ -20,10 +18,10 @@ export class UserManager {
                 }
             }
             `,
-            variables: {
-                input: username,
-            },
-        })
-        return res;
-    }
+      variables: {
+        input: username,
+      },
+    });
+    return res;
+  }
 }

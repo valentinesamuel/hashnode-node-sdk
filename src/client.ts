@@ -1,4 +1,5 @@
-import { UserManager } from "./managers/user.manager";
+import { GraphQLClient } from 'graphql-request';
+import { UserManager } from './managers/user.manager';
 
 interface ClientOptions {
   apiKey: string;
@@ -20,7 +21,10 @@ export class HashnodeSDKClient {
    */
   private readonly baseUrl: string;
 
-  public readonly userManager: UserManager
+  private readonly gqlClient: GraphQLClient;
+
+  public readonly userManager: UserManager;
+
 
   /**
    * Creates an instance of HashnodeSDKClient.
@@ -32,7 +36,30 @@ export class HashnodeSDKClient {
   constructor({ apiKey, baseUrl }: ClientOptions) {
     this.apiKey = apiKey;
     this.baseUrl = baseUrl;
-    this.userManager = new UserManager(this)
+
+    this.gqlClient = new GraphQLClient(this.baseUrl, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `${this.apiKey}`,
+      },
+    });
+
+    this.userManager = new UserManager(this);
   }
 
+  _request = async ({
+    query,
+    variables,
+  }: {
+    query: string;
+    variables?: Record<string, any>;
+  }) => {
+    try {
+      const data = await this.gqlClient.request(query, variables);
+      return data;
+    } catch (error) {
+      console.error('GraphQL request failed:', error);
+      throw error;
+    }
+  };
 }

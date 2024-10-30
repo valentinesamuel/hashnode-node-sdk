@@ -1,6 +1,6 @@
 {
   "name": "hashnode-node-sdk",
-  "version": "1.1.3",
+  "version": "1.1.0",
   "description": "A javascript sdk for working with hasnode graphql api",
   "keywords": [
     "hashnode",
@@ -17,11 +17,12 @@
     "url": "git+https://github.com/valentinesamuel/hashnode-node-sdk.git"
   },
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "type": "module",
   "license": "MIT",
-  "main": "dist/index.js",
+  "main": "dist/index.cjs",
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.16.4",
     "@changesets/cli": "^2.27.9",
@@ -50,7 +51,8 @@
     ".": {
       "import": "./dist/index.js",
       "default": "./dist/index.cjs"
-    }
+    },
+    "./dist/*": "./dist/*"
   },
   "dependencies": {
     "graphql-request": "^7.1.0"

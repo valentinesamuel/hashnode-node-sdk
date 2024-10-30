@@ -1,3 +1,5 @@
+import { UserManager } from "./managers/user.manager";
+
 interface ClientOptions {
   apiKey: string;
 
@@ -18,6 +20,8 @@ export class HashnodeSDKClient {
    */
   private readonly baseUrl: string;
 
+  public readonly userManager: UserManager
+
   /**
    * Creates an instance of HashnodeSDKClient.
    *
@@ -28,5 +32,7 @@ export class HashnodeSDKClient {
   constructor({ apiKey, baseUrl }: ClientOptions) {
     this.apiKey = apiKey;
     this.baseUrl = baseUrl;
+    this.userManager = new UserManager(this)
   }
+
 }

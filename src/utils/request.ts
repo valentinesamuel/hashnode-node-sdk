@@ -29,12 +29,16 @@ const gqlClient = new GraphQLClient(LibConfig.HASHNODE_API_ENDPOINT as string, {
  * @returns A promise that resolves to the data returned by the GraphQL request.
  * @throws Will throw an error if the GraphQL request fails.
  */
-export const gqlRequest = async (
+export const gqlRequest = async ({
+  query,
+  variables,
+}: {
   query: string,
-  variables?: Record<string, any>,
+  variables?: Record<string, any>
+},
 ) => {
   try {
-    const data = await gqlClient.request(query, variables);
+    const data = await gqlClient.request(query, { input: variables });
     return data;
   } catch (error) {
     console.error('GraphQL request failed:', error);

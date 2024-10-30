@@ -1,0 +1,2 @@
+# Run build and test commands
+npm run build && npm run test || exit 1

@@ -1,5 +1,11 @@
 # hashnode-node-sdk
 
+## 1.2.0
+
+### Minor Changes
+
+- 8da6d6a: moved request to client class
+
 ## 1.1.1
 
 ### Patch Changes

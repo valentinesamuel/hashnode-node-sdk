@@ -1,4 +1,3 @@
-import { GraphQLClient } from 'graphql-request';
 import { UserManager } from './managers/user.manager';
 
 interface ClientOptions {
@@ -21,8 +20,6 @@ export class HashnodeSDKClient {
    */
   private readonly baseUrl: string;
 
-  private readonly gqlClient: GraphQLClient;
-
   public readonly userManager: UserManager;
 
   /**
@@ -34,14 +31,7 @@ export class HashnodeSDKClient {
    */
   constructor({ apiKey, baseUrl }: ClientOptions) {
     this.apiKey = apiKey;
-    this.baseUrl = baseUrl;
-
-    this.gqlClient = new GraphQLClient(this.baseUrl, {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `${this.apiKey}`,
-      },
-    });
+    this.baseUrl = baseUrl || 'https:/gql.hashnode.com';
 
     this.userManager = new UserManager(this);
   }
@@ -54,8 +44,16 @@ export class HashnodeSDKClient {
     variables?: Record<string, any>;
   }) => {
     try {
-      const data = await this.gqlClient.request(query, variables);
-      return data;
+      const response = await fetch(this.baseUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `${this.apiKey}`,
+        },
+        body: JSON.stringify({ query, variables }),
+      });
+
+      return response.json();
     } catch (error) {
       console.error('GraphQL request failed:', error);
       throw error;

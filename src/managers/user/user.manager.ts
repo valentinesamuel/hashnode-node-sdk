@@ -1,5 +1,18 @@
 import type { HashnodeSDKClient } from '../../client';
-import { UserPostsSort, UserPublicationsSort, type Badge, type MyUser, type Tag, type User, type UserConnection, type UserPostConnection, type UserPostConnectionFilter, type UserPublicationsConnection, type UserPublicationsConnectionFilter, type UserTagsConnection } from '../../generated/gqlQueryTypes';
+import {
+  UserPostsSort,
+  UserPublicationsSort,
+  type Badge,
+  type MyUser,
+  type Tag,
+  type User,
+  type UserConnection,
+  type UserPostConnection,
+  type UserPostConnectionFilter,
+  type UserPublicationsConnection,
+  type UserPublicationsConnectionFilter,
+  type UserTagsConnection,
+} from '../../generated/gqlQueryTypes';
 import { GET_USER_QUERY } from './user.queries';
 
 export class UserManager {

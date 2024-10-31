@@ -51,8 +51,8 @@ export class HashnodeSDKClient {
       const response = await fetch(this.baseUrl, {
         method: 'POST',
         headers: {
-          "Content-Type": "application/json",
-          "Authorization": `${this.apiKey}`,
+          'Content-Type': 'application/json',
+          Authorization: `${this.apiKey}`,
         },
         body: JSON.stringify({ query, variables }),
       });

@@ -13,7 +13,16 @@ import {
   type UserPublicationsConnectionFilter,
   type UserTagsConnection,
 } from '../../generated/gqlQueryTypes';
-import { GET_USER_QUERY } from './user.queries';
+import {
+  GET_FOLLOWED_USERS_QUERY,
+  GET_USER_BADGES_QUERY,
+  GET_USER_FOLLOWED_TAGS_QUERY,
+  GET_USER_FOLLOWERS_QUERY,
+  GET_USER_POSTS_QUERY,
+  GET_USER_PUBLICATIONS_QUERY,
+  GET_USER_QUERY,
+  GET_USER_TECHSTACK_QUERY,
+} from './user.queries';
 
 export class UserManager {
   private readonly client: HashnodeSDKClient;
@@ -82,44 +91,7 @@ export class UserManager {
 
   async getUserFollowers(username: string, page: number, pageSize: number) {
     const res = await this.client._request({
-      query: `
-query GetUserFollowers($username: String!, $page: Int!, $pageSize: Int!) {
-    user(username: $username) {
-    followers(pageSize: $pageSize, page: $page) {
-      nodes {
-        id
-        username
-        bio {
-          markdown
-        }
-        profilePicture
-        socialMediaLinks{
-          website
-          github
-          twitter
-          instagram
-          facebook
-          stackoverflow
-          linkedin
-          youtube
-        }
-        dateJoined
-        isPro
-        following
-        deactivated
-        tagline
-      }
-      pageInfo {
-        hasNextPage
-        hasPreviousPage
-        previousPage
-        nextPage
-      }
-      totalDocuments
-    }
-  }
-}
-      `,
+      query: GET_USER_FOLLOWERS_QUERY,
       variables: {
         username,
         page,
@@ -131,44 +103,7 @@ query GetUserFollowers($username: String!, $page: Int!, $pageSize: Int!) {
 
   async getFollowedUsers(username: string, page: number, pageSize: number) {
     const res = await this.client._request({
-      query: `
-  query GetUserFollows($username: String!, $page: Int!, $pageSize: Int!) {
-    user(username: $username) {
-    follows(pageSize: $pageSize, page: $page) {
-      nodes {
-        id
-        username
-        bio {
-          markdown
-        }
-        profilePicture
-        socialMediaLinks{
-          website
-          github
-          twitter
-          instagram
-          facebook
-          stackoverflow
-          linkedin
-          youtube
-        }
-        dateJoined
-        isPro
-        following
-        deactivated
-        tagline
-      }
-      pageInfo {
-        hasNextPage
-        hasPreviousPage
-        previousPage
-        nextPage
-      }
-      totalDocuments
-    }
-  }
-}
-      `,
+      query: GET_FOLLOWED_USERS_QUERY,
       variables: {
         username,
         page,
@@ -180,33 +115,7 @@ query GetUserFollowers($username: String!, $page: Int!, $pageSize: Int!) {
 
   async getUserTechStack(username: string, page: number, pageSize: number) {
     const res = await this.client._request({
-      query: `
-  query GetUserTechstack($username: String!, $page: Int!, $pageSize: Int!) {
-    user(username: $username) {
-    techStack(pageSize: $pageSize, page: $page) {
-      nodes {
-        id
-        name
-        slug
-        logo
-        tagline
-        info {
-          markdown
-        }
-        postsCount
-        followersCount
-      }
-      pageInfo {
-        hasNextPage
-        hasPreviousPage
-        previousPage
-        nextPage
-      }
-      totalDocuments
-    }
-  }
-}
-      `,
+      query: GET_USER_TECHSTACK_QUERY,
       variables: {
         username,
         page,
@@ -218,21 +127,7 @@ query GetUserFollowers($username: String!, $page: Int!, $pageSize: Int!) {
 
   async getUserBadges(username: string, page: number, pageSize: number) {
     const res = await this.client._request({
-      query: `
-  query getUserBadges($username: String!) {
-    user(username: $username) {
-    badges {
-      id
-      name
-      description
-      image
-      dateAssigned
-      infoURL
-      suppressed
-    }
-  }
-}
-  `,
+      query: GET_USER_BADGES_QUERY,
       variables: {
         username,
       },
@@ -248,95 +143,7 @@ query GetUserFollowers($username: String!, $page: Int!, $pageSize: Int!) {
     sortBy: UserPublicationsSort = UserPublicationsSort.DateCreatedDesc,
   ) {
     const res = await this.client._request({
-      query: `
-  query getUserPublications($username: String!, $first: Int!, $after: String, $sortBy: UserPublicationsSort, $filter: UserPublicationsConnectionFilter) {
-    user(username: $username) {
-    publications(first: $first, after: $after, sortBy: $sortBy, filter: $filter) {
-      edges {
-        node {
-          id
-          title
-          displayTitle
-          descriptionSEO
-          about {
-            markdown
-          }
-          url
-          canonicalURL
-          author {
-            id
-          }
-          favicon
-          headerColor
-          metaTags
-          integrations {
-            fbPixelID
-            fathomSiteID
-            fathomCustomDomainEnabled
-            fathomCustomDomain
-            hotjarSiteID
-            matomoSiteID
-            matomoURL
-            gaTrackingID
-            plausibleAnalyticsEnabled
-            wmPaymentPointer
-            umamiWebsiteUUID
-            umamiShareId
-            gTagManagerID
-          }
-          followersCount
-          pinnedPost {
-            id
-            slug
-            previousSlugs
-            updatedAt
-            publishedAt
-            featuredAt
-            reactionCount
-            tags {
-              id
-              name
-              slug
-              logo
-              tagline
-            }
-            url
-            coverImage {
-              url
-              isPortrait
-              attribution
-              photographer
-              isAttributionHidden
-            }
-            brief
-            views
-            responseCount
-            replyCount
-          }
-          urlPattern
-          isTeam
-          links {
-            website
-            github
-            twitter
-            instagram
-            facebook
-            linkedin
-            youtube
-          }
-        }
-        cursor
-        role
-      }
-      pageInfo {
-        hasNextPage
-        endCursor
-      }
-      totalDocuments
-    }
-  }
-}
-      `,
+      query: GET_USER_PUBLICATIONS_QUERY,
       variables: {
         username,
         first,
@@ -356,49 +163,7 @@ query GetUserFollowers($username: String!, $page: Int!, $pageSize: Int!) {
     sortBy: UserPostsSort = UserPostsSort.DatePublishedDesc,
   ) {
     const res = await this.client._request({
-      query: `
-   query getUserPosts($username: String!, $pageSize: Int!, $page: Int!, $sortBy: UserPostsSort, $filter: UserPostConnectionFilter) {
-    user(username: $username) {
-    posts(pageSize: $pageSize, page: $page, sortBy: $sortBy, filter: $filter) {
-      nodes {
-        id
-        slug
-        previousSlugs
-        updatedAt
-        publishedAt
-        featuredAt
-        reactionCount
-        tags {
-          id
-          name
-          slug
-          logo
-          tagline
-        }
-        url
-        coverImage {
-          url
-          isPortrait
-          attribution
-          photographer
-          isAttributionHidden
-        }
-        brief
-        views
-        responseCount
-        replyCount
-      }
-      pageInfo {
-        hasNextPage
-        hasPreviousPage
-        previousPage
-        nextPage
-      }
-      totalDocuments
-    }
-  }
-}
-      `,
+      query: GET_USER_POSTS_QUERY,
       variables: {
         username,
         first,
@@ -412,24 +177,7 @@ query GetUserFollowers($username: String!, $page: Int!, $pageSize: Int!) {
 
   async getUserFollowedTags(username: string) {
     const res = await this.client._request({
-      query: `
-    query getUserPosts($username: String!) {
-      user(username: $username) {
-        tagsFollowing {
-          id
-          name
-          slug
-          logo
-          tagline
-          info {
-            markdown
-          }
-          followersCount
-          postsCount
-        }
-      }
-    }
-      `,
+      query: GET_USER_FOLLOWED_TAGS_QUERY,
       variables: {
         username,
       },

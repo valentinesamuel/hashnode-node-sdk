@@ -1,5 +1,5 @@
 import type { HashnodeSDKClient } from '../../client';
-import { UserPostsSort, UserPublicationsSort, type Badge, type MyUser, type Tag, type User, type UserConnection, type UserPostConnection, type UserPostConnectionFilter, type UserPublicationsConnectionFilter, type UserTagsConnection } from '../../generated/gqlQueryTypes';
+import { UserPostsSort, UserPublicationsSort, type Badge, type MyUser, type Tag, type User, type UserConnection, type UserPostConnection, type UserPostConnectionFilter, type UserPublicationsConnection, type UserPublicationsConnectionFilter, type UserTagsConnection } from '../../generated/gqlQueryTypes';
 import { GET_USER_QUERY } from './user.queries';
 
 export class UserManager {
@@ -22,6 +22,7 @@ export class UserManager {
   async getMe() {
     const res = await this.client._request({
       query: `
+      query {
           me {
             id
             name
@@ -59,8 +60,10 @@ export class UserManager {
             deactivated
             role
           }
+        }
         `,
     });
+    console.log(res);
     return res as MyUser;
   }
 
@@ -110,7 +113,7 @@ query GetUserFollowers($username: String!, $page: Int!, $pageSize: Int!) {
         pageSize,
       },
     });
-    return res.user.followers as UserConnection;
+    return res.data.user.followers as UserConnection;
   }
 
   async getFollowedUsers(username: string, page: number, pageSize: number) {
@@ -159,7 +162,7 @@ query GetUserFollowers($username: String!, $page: Int!, $pageSize: Int!) {
         pageSize,
       },
     });
-    return res.users.follows as UserConnection;
+    return res.data.user.follows as UserConnection;
   }
 
   async getUserTechStack(username: string, page: number, pageSize: number) {
@@ -197,7 +200,7 @@ query GetUserFollowers($username: String!, $page: Int!, $pageSize: Int!) {
         pageSize,
       },
     });
-    return res.user.techStack as UserTagsConnection;
+    return res.data.user.techStack as UserTagsConnection;
   }
 
   async getUserBadges(username: string, page: number, pageSize: number) {
@@ -221,7 +224,7 @@ query GetUserFollowers($username: String!, $page: Int!, $pageSize: Int!) {
         username,
       },
     });
-    return res.user.badges as Badge[];
+    return res.data.user.badges as Badge[];
   }
 
   async getUserPublications(
@@ -329,15 +332,15 @@ query GetUserFollowers($username: String!, $page: Int!, $pageSize: Int!) {
         filter,
       },
     });
-    return res;
+    return res.data.user.publications as UserPublicationsConnection;
   }
 
   async getUserPosts(
     username: string,
     first: number,
     after: string,
-    sortBy: UserPostsSort = UserPostsSort.DatePublishedDesc,
     filter: UserPostConnectionFilter,
+    sortBy: UserPostsSort = UserPostsSort.DatePublishedDesc,
   ) {
     const res = await this.client._request({
       query: `
@@ -391,7 +394,7 @@ query GetUserFollowers($username: String!, $page: Int!, $pageSize: Int!) {
         filter,
       },
     });
-    return res.user.posts as UserPostConnection;
+    return res.data.user.posts as UserPostConnection;
   }
 
   async getUserFollowedTags(username: string) {
@@ -418,6 +421,6 @@ query GetUserFollowers($username: String!, $page: Int!, $pageSize: Int!) {
         username,
       },
     });
-    return res.user.tagsFollowing as Tag[];
+    return res.data.user.tagsFollowing as Tag[];
   }
 }

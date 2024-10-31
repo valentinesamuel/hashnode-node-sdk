@@ -31,7 +31,11 @@ export class HashnodeSDKClient {
    */
   constructor({ apiKey, baseUrl }: ClientOptions) {
     this.apiKey = apiKey;
-    this.baseUrl = baseUrl || 'https:/gql.hashnode.com';
+    this.baseUrl = baseUrl || 'https://gql.hashnode.com';
+
+    if (!this.apiKey) {
+      throw new Error('An API key is required to create a client.');
+    }
 
     this.userManager = new UserManager(this);
   }
@@ -47,8 +51,8 @@ export class HashnodeSDKClient {
       const response = await fetch(this.baseUrl, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          Authorization: `${this.apiKey}`,
+          "Content-Type": "application/json",
+          "Authorization": `${this.apiKey}`,
         },
         body: JSON.stringify({ query, variables }),
       });

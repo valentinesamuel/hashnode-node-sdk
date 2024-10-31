@@ -1,4 +1,6 @@
 import type { HashnodeSDKClient } from '../../client';
+import { UserPostsSort, UserPublicationsSort, type Badge, type MyUser, type Tag, type User, type UserConnection, type UserPostConnection, type UserPostConnectionFilter, type UserPublicationsConnectionFilter, type UserTagsConnection } from '../../generated/gqlQueryTypes';
+import { GET_USER_QUERY } from './user.queries';
 
 export class UserManager {
   private readonly client: HashnodeSDKClient;
@@ -7,60 +9,18 @@ export class UserManager {
     this.client = client;
   }
 
-  getUser(username: string) {
-    const res = this.client._request({
-      query: `
-        query GetUserByUsername($username: String!) {
-          user(username: $username) {
-            id
-            name
-            username
-            bio {
-              markdown
-              text
-            }
-            profilePicture
-            socialMediaLinks {
-              website
-              github
-              twitter
-              instagram
-              facebook
-              stackoverflow
-              linkedin
-              youtube
-            }
-            badges {
-              id
-              name
-              description
-              image
-              dateAssigned
-              infoURL
-              suppressed
-            }
-            followersCount
-            followingsCount
-            tagline
-            dateJoined
-            location
-            availableFor
-            deactivated
-            following
-            followsBack
-            isPro
-          }
-        }
-          `,
+  async getUser(username: string) {
+    const res = await this.client._request({
+      query: GET_USER_QUERY,
       variables: {
         username,
       },
     });
-    return res;
+    return res.data.user as User;
   }
 
-  getMe() {
-    const res = this.client._request({
+  async getMe() {
+    const res = await this.client._request({
       query: `
           me {
             id
@@ -101,11 +61,11 @@ export class UserManager {
           }
         `,
     });
-    return res;
+    return res as MyUser;
   }
 
-  getUserFollowers(username: string, page: number, pageSize: number) {
-    const res = this.client._request({
+  async getUserFollowers(username: string, page: number, pageSize: number) {
+    const res = await this.client._request({
       query: `
 query GetUserFollowers($username: String!, $page: Int!, $pageSize: Int!) {
     user(username: $username) {
@@ -150,11 +110,11 @@ query GetUserFollowers($username: String!, $page: Int!, $pageSize: Int!) {
         pageSize,
       },
     });
-    return res;
+    return res.user.followers as UserConnection;
   }
 
-  getFollowedUsers(username: string, page: number, pageSize: number) {
-    const res = this.client._request({
+  async getFollowedUsers(username: string, page: number, pageSize: number) {
+    const res = await this.client._request({
       query: `
   query GetUserFollows($username: String!, $page: Int!, $pageSize: Int!) {
     user(username: $username) {
@@ -199,11 +159,11 @@ query GetUserFollowers($username: String!, $page: Int!, $pageSize: Int!) {
         pageSize,
       },
     });
-    return res;
+    return res.users.follows as UserConnection;
   }
 
-  getUserTechStack(username: string, page: number, pageSize: number) {
-    const res = this.client._request({
+  async getUserTechStack(username: string, page: number, pageSize: number) {
+    const res = await this.client._request({
       query: `
   query GetUserTechstack($username: String!, $page: Int!, $pageSize: Int!) {
     user(username: $username) {
@@ -237,11 +197,11 @@ query GetUserFollowers($username: String!, $page: Int!, $pageSize: Int!) {
         pageSize,
       },
     });
-    return res;
+    return res.user.techStack as UserTagsConnection;
   }
 
-  getUserBadges(username: string, page: number, pageSize: number) {
-    const res = this.client._request({
+  async getUserBadges(username: string, page: number, pageSize: number) {
+    const res = await this.client._request({
       query: `
   query getUserBadges($username: String!) {
     user(username: $username) {
@@ -258,14 +218,20 @@ query GetUserFollowers($username: String!, $page: Int!, $pageSize: Int!) {
 }
   `,
       variables: {
-        username
-      }
+        username,
+      },
     });
-    return res;
+    return res.user.badges as Badge[];
   }
 
-  getUserPublications(username: string, first: number, after: string, sortBy: string, filter: string) {
-    const res = this.client._request({
+  async getUserPublications(
+    username: string,
+    first: number,
+    after: string,
+    filter: UserPublicationsConnectionFilter,
+    sortBy: UserPublicationsSort = UserPublicationsSort.DateCreatedDesc,
+  ) {
+    const res = await this.client._request({
       query: `
   query getUserPublications($username: String!, $first: Int!, $after: String, $sortBy: UserPublicationsSort, $filter: UserPublicationsConnectionFilter) {
     user(username: $username) {
@@ -360,14 +326,20 @@ query GetUserFollowers($username: String!, $page: Int!, $pageSize: Int!) {
         first,
         after,
         sortBy,
-        filter
-      }
+        filter,
+      },
     });
     return res;
   }
 
-  getUserPosts(username: string, first: number, after: string, sortBy: string, filter: string) {
-    const res = this.client._request({
+  async getUserPosts(
+    username: string,
+    first: number,
+    after: string,
+    sortBy: UserPostsSort = UserPostsSort.DatePublishedDesc,
+    filter: UserPostConnectionFilter,
+  ) {
+    const res = await this.client._request({
       query: `
    query getUserPosts($username: String!, $pageSize: Int!, $page: Int!, $sortBy: UserPostsSort, $filter: UserPostConnectionFilter) {
     user(username: $username) {
@@ -416,13 +388,14 @@ query GetUserFollowers($username: String!, $page: Int!, $pageSize: Int!) {
         first,
         after,
         sortBy,
-        filter
-      }
+        filter,
+      },
     });
+    return res.user.posts as UserPostConnection;
   }
 
-  getUserFollowedTags(username: string) {
-    const res = this.client._request({
+  async getUserFollowedTags(username: string) {
+    const res = await this.client._request({
       query: `
     query getUserPosts($username: String!) {
       user(username: $username) {
@@ -442,8 +415,9 @@ query GetUserFollowers($username: String!, $page: Int!, $pageSize: Int!) {
     }
       `,
       variables: {
-        username
-      }
+        username,
+      },
     });
+    return res.user.tagsFollowing as Tag[];
   }
 }

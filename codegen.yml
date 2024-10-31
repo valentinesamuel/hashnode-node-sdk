@@ -1,0 +1,13 @@
+overwrite: true
+schema: "https://gql.hashnode.com"
+documents:
+- "src/managers/**/*.queries.ts" 
+generates:
+  src/generated/gqlQueryTypes.ts:
+    plugins:
+    - "typescript"
+    - "typescript-operations"
+    - "typescript-graphql-request"
+config:
+  useTypeImports: true # Ensures cleaner imports of types
+  

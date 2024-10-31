@@ -1,4 +1,4 @@
-import { UserManager } from './managers/user.manager';
+import { UserManager } from './managers/user/user.manager';
 
 interface ClientOptions {
   apiKey: string;

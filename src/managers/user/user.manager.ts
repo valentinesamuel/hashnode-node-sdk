@@ -24,11 +24,27 @@ import {
   GET_USER_TECHSTACK_QUERY,
 } from './user.queries';
 
+/**
+ * Manages user-related operations.
+ *
+ * @extends BaseManager
+ */
 export class UserManager extends BaseManager {
+  /**
+   * Creates an instance of UserManager.
+   *
+   * @param client - The Hashnode SDK client.
+   */
   constructor(client: HashnodeSDKClient) {
     super(client, 'UserManager');
   }
 
+  /**
+   * Retrieves user information by username.
+   *
+   * @param username - The username of the user.
+   * @returns The user information.
+   */
   async getUser(username: string) {
     const res = await this.makeRequest<{ user: User }>(
       'getUser',
@@ -38,6 +54,14 @@ export class UserManager extends BaseManager {
     return res.user;
   }
 
+  /**
+   * Retrieves the followers of a user.
+   *
+   * @param username - The username of the user.
+   * @param page - The page number for pagination.
+   * @param pageSize - The number of items per page.
+   * @returns The user followers.
+   */
   async getUserFollowers(username: string, page: number, pageSize: number) {
     const res = await this.makeRequest<{ user: UserConnection }>(
       'getUserFollowers',
@@ -47,6 +71,14 @@ export class UserManager extends BaseManager {
     return res.user;
   }
 
+  /**
+   * Retrieves the users followed by a user.
+   *
+   * @param username - The username of the user.
+   * @param page - The page number for pagination.
+   * @param pageSize - The number of items per page.
+   * @returns The followed users.
+   */
   async getFollowedUsers(username: string, page: number, pageSize: number) {
     const res = await this.makeRequest<{ user: UserConnection }>(
       'getFollowedUsers',
@@ -56,6 +88,14 @@ export class UserManager extends BaseManager {
     return res.user;
   }
 
+  /**
+   * Retrieves the tech stack of a user.
+   *
+   * @param username - The username of the user.
+   * @param page - The page number for pagination.
+   * @param pageSize - The number of items per page.
+   * @returns The user's tech stack.
+   */
   async getUserTechStack(username: string, page: number, pageSize: number) {
     const res = await this.makeRequest<{ user: UserTagsConnection }>(
       'getUserTechStack',
@@ -65,6 +105,14 @@ export class UserManager extends BaseManager {
     return res.user;
   }
 
+  /**
+   * Retrieves the badges of a user.
+   *
+   * @param username - The username of the user.
+   * @param page - The page number for pagination.
+   * @param pageSize - The number of items per page.
+   * @returns The user's badges.
+   */
   async getUserBadges(username: string, page: number, pageSize: number) {
     const res = await this.makeRequest<{ user: Badge[] }>(
       'getUserBadges',
@@ -74,6 +122,16 @@ export class UserManager extends BaseManager {
     return res.user;
   }
 
+  /**
+   * Retrieves the publications of a user.
+   *
+   * @param username - The username of the user.
+   * @param first - The number of items to retrieve.
+   * @param after - The cursor for pagination.
+   * @param filter - The filter criteria for publications.
+   * @param sortBy - The sorting criteria for publications.
+   * @returns The user's publications.
+   */
   async getUserPublications(
     username: string,
     first: number,
@@ -89,6 +147,16 @@ export class UserManager extends BaseManager {
     return res.user;
   }
 
+  /**
+   * Retrieves the posts of a user.
+   *
+   * @param username - The username of the user.
+   * @param first - The number of items to retrieve.
+   * @param after - The cursor for pagination.
+   * @param filter - The filter criteria for posts.
+   * @param sortBy - The sorting criteria for posts.
+   * @returns The user's posts.
+   */
   async getUserPosts(
     username: string,
     first: number,
@@ -104,6 +172,12 @@ export class UserManager extends BaseManager {
     return res.user;
   }
 
+  /**
+   * Retrieves the tags followed by a user.
+   *
+   * @param username - The username of the user.
+   * @returns The tags followed by the user.
+   */
   async getUserFollowedTags(username: string) {
     const res = await this.makeRequest<{ user: Tag[] }>(
       'getUserFollowedTags',

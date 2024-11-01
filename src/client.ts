@@ -21,7 +21,14 @@ export class HashnodeSDKClient {
    */
   private readonly baseUrl: string;
 
+  /**
+   * The user manager for managing user-related operations.
+   */
   public readonly userManager: UserManager;
+
+  /**
+   * The manager for managing operations related to the authenticated user.
+   */
   public readonly meManager: MeManager;
 
   /**

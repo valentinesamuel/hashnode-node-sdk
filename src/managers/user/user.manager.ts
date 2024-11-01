@@ -3,7 +3,6 @@ import {
   UserPostsSort,
   UserPublicationsSort,
   type Badge,
-  type MyUser,
   type Tag,
   type User,
   type UserConnection,
@@ -39,54 +38,6 @@ export class UserManager {
       },
     });
     return res.data.user as User;
-  }
-
-  async getMe() {
-    const res = await this.client._request({
-      query: `
-      query {
-          me {
-            id
-            name
-            username
-            bio {
-              markdown
-              text
-            }
-            profilePicture
-            socialMediaLinks {
-              website
-              github
-              twitter
-              instagram
-              facebook
-              stackoverflow
-              linkedin
-              youtube
-            }
-            badges {
-              id
-              name
-              description
-              image
-              dateAssigned
-              infoURL
-              suppressed
-            }
-            followersCount
-            followingsCount
-            tagline
-            dateJoined
-            location
-            availableFor
-            deactivated
-            role
-          }
-        }
-        `,
-    });
-    console.log(res);
-    return res as MyUser;
   }
 
   async getUserFollowers(username: string, page: number, pageSize: number) {

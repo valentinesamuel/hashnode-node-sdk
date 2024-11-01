@@ -31,14 +31,6 @@ export const GET_ME_QUERY = gql`
       email
       role
       unverifiedEmail
-      betaFeatures {
-        id
-        key
-        title
-        description
-        url
-        enabled
-      }
     }
   }
 `;

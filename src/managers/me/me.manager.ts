@@ -1,3 +1,4 @@
+import { BaseManager } from '../base.manager';
 import type { HashnodeSDKClient } from '../../client';
 import {
   UserPostsSort,
@@ -23,27 +24,22 @@ import {
   GET_MY_TECHSTACK_QUERY,
 } from './me.queries';
 
-export class MeManager {
-  private readonly client: HashnodeSDKClient;
-
+export class MeManager extends BaseManager {
   constructor(client: HashnodeSDKClient) {
-    console.log('MeManager created');
-    this.client = client;
+    super(client, 'MeManager');
   }
 
   async getMe() {
-    const res = await this.client._request({
-      query: GET_ME_QUERY,
-    });
-    return res.data.me as MyUser;
+    const res = await this.makeRequest<{ me: MyUser }>('getMe', GET_ME_QUERY);
+    return res.me;
   }
 
   async getMyEmailNotificationPreferences() {
-    const res = await this.client._request({
-      query: GET_MY_EMAIL_PREFENCES_QUERY,
-    });
-    return res.data.me
-      .emailNotificationPreferences as EmailNotificationPreferences;
+    const res = await this.makeRequest<{ me: EmailNotificationPreferences }>(
+      'getMyEmailNotificationPreferences',
+      GET_MY_EMAIL_PREFENCES_QUERY,
+    );
+    return res.me;
   }
 
   async getMyPublications(
@@ -52,16 +48,12 @@ export class MeManager {
     filter: UserPublicationsConnectionFilter,
     sortBy: UserPublicationsSort = UserPublicationsSort.DateCreatedDesc,
   ) {
-    const res = await this.client._request({
-      query: GET_MY_PUBLICATIONS_QUERY,
-      variables: {
-        first,
-        after,
-        sortBy,
-        filter,
-      },
-    });
-    return res.data.me.publications as UserPublicationsConnection;
+    const res = await this.makeRequest<{ me: UserPublicationsConnection }>(
+      'getMyPublications',
+      GET_MY_PUBLICATIONS_QUERY,
+      { first, after, sortBy, filter },
+    );
+    return res.me;
   }
 
   async getMyPosts(
@@ -70,55 +62,46 @@ export class MeManager {
     filter: UserPostConnectionFilter,
     sortBy: UserPostsSort = UserPostsSort.DatePublishedDesc,
   ) {
-    const res = await this.client._request({
-      query: GET_MY_POSTS_QUERY,
-      variables: {
-        first,
-        after,
-        sortBy,
-        filter,
-      },
-    });
-    return res.data.me.posts as UserPostConnection;
+    const res = await this.makeRequest<{ me: UserPostConnection }>(
+      'getMyPosts',
+      GET_MY_POSTS_QUERY,
+      { first, after, sortBy, filter },
+    );
+    return res.me;
   }
 
   async getMyBadges() {
-    const res = await this.client._request({
-      query: GET_MY_BADGES_QUERY,
-    });
-    return res.data.me.badges as Badge[];
+    const res = await this.makeRequest<{ me: Badge[] }>(
+      'getMyBadges',
+      GET_MY_BADGES_QUERY,
+    );
+    return res.me;
   }
 
   async getMyTechStack(page: number, pageSize: number) {
-    const res = await this.client._request({
-      query: GET_MY_TECHSTACK_QUERY,
-      variables: {
-        page,
-        pageSize,
-      },
-    });
-    return res.data.me.techStack as UserTagsConnection;
+    const res = await this.makeRequest<{ me: UserTagsConnection }>(
+      'getMyTechStack',
+      GET_MY_TECHSTACK_QUERY,
+      { page, pageSize },
+    );
+    return res.me;
   }
 
   async getMyFollowedUsers(page: number, pageSize: number) {
-    const res = await this.client._request({
-      query: GET_MY_FOLLOWED_USERS_QUERY,
-      variables: {
-        page,
-        pageSize,
-      },
-    });
-    return res.data.me.follows as UserConnection;
+    const res = await this.makeRequest<{ me: UserConnection }>(
+      'getMyFollowedUsers',
+      GET_MY_FOLLOWED_USERS_QUERY,
+      { page, pageSize },
+    );
+    return res.me;
   }
 
   async getUserFollowers(page: number, pageSize: number) {
-    const res = await this.client._request({
-      query: GET_MY_FOLLOWERS_QUERY,
-      variables: {
-        page,
-        pageSize,
-      },
-    });
-    return res.data.me.followers as UserConnection;
+    const res = await this.makeRequest<{ me: UserConnection }>(
+      'getUserFollowers',
+      GET_MY_FOLLOWERS_QUERY,
+      { page, pageSize },
+    );
+    return res.me;
   }
 }

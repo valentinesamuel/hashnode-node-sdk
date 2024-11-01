@@ -1,3 +1,4 @@
+import { BaseManager } from '../base.manager';
 import type { HashnodeSDKClient } from '../../client';
 import {
   UserPostsSort,
@@ -23,67 +24,54 @@ import {
   GET_USER_TECHSTACK_QUERY,
 } from './user.queries';
 
-export class UserManager {
-  private readonly client: HashnodeSDKClient;
+export class UserManager extends BaseManager {
   constructor(client: HashnodeSDKClient) {
-    console.log('UserManager created');
-    this.client = client;
+    super(client, 'UserManager');
   }
 
   async getUser(username: string) {
-    const res = await this.client._request({
-      query: GET_USER_QUERY,
-      variables: {
-        username,
-      },
-    });
-    return res.data.user as User;
+    const res = await this.makeRequest<{ user: User }>(
+      'getUser',
+      GET_USER_QUERY,
+      { username },
+    );
+    return res.user;
   }
 
   async getUserFollowers(username: string, page: number, pageSize: number) {
-    const res = await this.client._request({
-      query: GET_USER_FOLLOWERS_QUERY,
-      variables: {
-        username,
-        page,
-        pageSize,
-      },
-    });
-    return res.data.user.followers as UserConnection;
+    const res = await this.makeRequest<{ user: UserConnection }>(
+      'getUserFollowers',
+      GET_USER_FOLLOWERS_QUERY,
+      { username, page, pageSize },
+    );
+    return res.user;
   }
 
   async getFollowedUsers(username: string, page: number, pageSize: number) {
-    const res = await this.client._request({
-      query: GET_FOLLOWED_USERS_QUERY,
-      variables: {
-        username,
-        page,
-        pageSize,
-      },
-    });
-    return res.data.user.follows as UserConnection;
+    const res = await this.makeRequest<{ user: UserConnection }>(
+      'getFollowedUsers',
+      GET_FOLLOWED_USERS_QUERY,
+      { username, page, pageSize },
+    );
+    return res.user;
   }
 
   async getUserTechStack(username: string, page: number, pageSize: number) {
-    const res = await this.client._request({
-      query: GET_USER_TECHSTACK_QUERY,
-      variables: {
-        username,
-        page,
-        pageSize,
-      },
-    });
-    return res.data.user.techStack as UserTagsConnection;
+    const res = await this.makeRequest<{ user: UserTagsConnection }>(
+      'getUserTechStack',
+      GET_USER_TECHSTACK_QUERY,
+      { username, page, pageSize },
+    );
+    return res.user;
   }
 
   async getUserBadges(username: string, page: number, pageSize: number) {
-    const res = await this.client._request({
-      query: GET_USER_BADGES_QUERY,
-      variables: {
-        username,
-      },
-    });
-    return res.data.user.badges as Badge[];
+    const res = await this.makeRequest<{ user: Badge[] }>(
+      'getUserBadges',
+      GET_USER_BADGES_QUERY,
+      { username },
+    );
+    return res.user;
   }
 
   async getUserPublications(
@@ -93,17 +81,12 @@ export class UserManager {
     filter: UserPublicationsConnectionFilter,
     sortBy: UserPublicationsSort = UserPublicationsSort.DateCreatedDesc,
   ) {
-    const res = await this.client._request({
-      query: GET_USER_PUBLICATIONS_QUERY,
-      variables: {
-        username,
-        first,
-        after,
-        sortBy,
-        filter,
-      },
-    });
-    return res.data.user.publications as UserPublicationsConnection;
+    const res = await this.makeRequest<{ user: UserPublicationsConnection }>(
+      'getUserPublications',
+      GET_USER_PUBLICATIONS_QUERY,
+      { username, first, after, sortBy, filter },
+    );
+    return res.user;
   }
 
   async getUserPosts(
@@ -113,26 +96,20 @@ export class UserManager {
     filter: UserPostConnectionFilter,
     sortBy: UserPostsSort = UserPostsSort.DatePublishedDesc,
   ) {
-    const res = await this.client._request({
-      query: GET_USER_POSTS_QUERY,
-      variables: {
-        username,
-        first,
-        after,
-        sortBy,
-        filter,
-      },
-    });
-    return res.data.user.posts as UserPostConnection;
+    const res = await this.makeRequest<{ user: UserPostConnection }>(
+      'getUserPosts',
+      GET_USER_POSTS_QUERY,
+      { username, first, after, sortBy, filter },
+    );
+    return res.user;
   }
 
   async getUserFollowedTags(username: string) {
-    const res = await this.client._request({
-      query: GET_USER_FOLLOWED_TAGS_QUERY,
-      variables: {
-        username,
-      },
-    });
-    return res.data.user.tagsFollowing as Tag[];
+    const res = await this.makeRequest<{ user: Tag[] }>(
+      'getUserFollowedTags',
+      GET_USER_FOLLOWED_TAGS_QUERY,
+      { username },
+    );
+    return res.user;
   }
 }

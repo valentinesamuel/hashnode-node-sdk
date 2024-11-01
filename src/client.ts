@@ -1,3 +1,4 @@
+import { MeManager } from './managers/me/me.manager';
 import { UserManager } from './managers/user/user.manager';
 
 interface ClientOptions {
@@ -21,6 +22,7 @@ export class HashnodeSDKClient {
   private readonly baseUrl: string;
 
   public readonly userManager: UserManager;
+  public readonly meManager: MeManager;
 
   /**
    * Creates an instance of HashnodeSDKClient.
@@ -38,6 +40,7 @@ export class HashnodeSDKClient {
     }
 
     this.userManager = new UserManager(this);
+    this.meManager = new MeManager(this);
   }
 
   _request = async ({

@@ -33,7 +33,7 @@ export class HashnodeSDKClient {
   public readonly meManager: MeManager;
 
   /**
-   * The manager for managing operations related to check for available domains. 
+   * The manager for managing operations related to check for available domains.
    */
   public readonly domainAvailabilityManager: DomainAvailabilityManager;
 

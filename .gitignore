@@ -124,3 +124,9 @@ dist
 
 # Test files
 .testRequest.js
+
+# Mac files
+.DS_Store
+
+# IntelliJ files
+.idea/

@@ -1,8 +1,13 @@
 import { BaseManager } from '../base.manager';
 import type { HashnodeSDKClient } from '../../client';
-import { GET_TAG_BY_SLUG_QUERY, GET_TOP_COMMENTERS_QUERY } from './misc.queries';
-import type { CommenterUserConnection, Tag } from '../../generated/gqlQueryTypes';
-
+import {
+  GET_TAG_BY_SLUG_QUERY,
+  GET_TOP_COMMENTERS_QUERY,
+} from './misc.queries';
+import type {
+  CommenterUserConnection,
+  Tag,
+} from '../../generated/gqlQueryTypes';
 
 /**
  * Manages random operations.
@@ -26,22 +31,24 @@ export class MiscellaneousManager extends BaseManager {
    * @returns The top users who have most actively participated in discussions by commenting in the last 7 days.
    */
   async getTopCommenters(first: number, after?: string) {
-    const res = await this.makeRequest<{ topCommenters: CommenterUserConnection }>(
-      'getTopCommenters',
-      GET_TOP_COMMENTERS_QUERY,
-      { first, after },
-    );
+    const res = await this.makeRequest<{
+      topCommenters: CommenterUserConnection;
+    }>('getTopCommenters', GET_TOP_COMMENTERS_QUERY, { first, after });
     return res.topCommenters;
   }
 
   /**
    * Returns tag details by its slug
-   * 
+   *
    * @param slug - The slug of the tag.
    * @returns The tag details.
    */
   async getTagBySlug(slug: string) {
-    const res = await this.makeRequest<{ tag: Tag }>('getTagBySlug', GET_TAG_BY_SLUG_QUERY, { slug });
+    const res = await this.makeRequest<{ tag: Tag }>(
+      'getTagBySlug',
+      GET_TAG_BY_SLUG_QUERY,
+      { slug },
+    );
     return res.tag;
   }
 }

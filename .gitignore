@@ -130,3 +130,6 @@ dist
 
 # IntelliJ files
 .idea/
+
+# Visual Studio Agile
+.taskboard/

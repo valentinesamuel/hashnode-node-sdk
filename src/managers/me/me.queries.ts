@@ -76,6 +76,13 @@ export const GET_MY_PUBLICATIONS_QUERY = gql`
             canonicalURL
             author {
               id
+              username
+              name
+              name
+              bio {
+                  markdown
+              }
+              profilePicture
             }
             favicon
             headerColor

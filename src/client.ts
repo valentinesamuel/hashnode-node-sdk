@@ -1,5 +1,6 @@
 import { DomainAvailabilityManager } from './managers/domainAvailability/domainAvailability.manager';
 import { MeManager } from './managers/me/me.manager';
+import { MiscellaneousManager } from './managers/misc/misc.manager';
 import { UserManager } from './managers/user/user.manager';
 
 interface ClientOptions {
@@ -38,6 +39,11 @@ export class HashnodeSDKClient {
   public readonly domainAvailabilityManager: DomainAvailabilityManager;
 
   /**
+   * The manager for managing miscellaneous operations.
+   */
+   public readonly miscManager: MiscellaneousManager;
+
+  /**
    * Creates an instance of HashnodeSDKClient.
    *
    * @param options - The options for configuring the client.
@@ -55,6 +61,7 @@ export class HashnodeSDKClient {
     this.userManager = new UserManager(this);
     this.meManager = new MeManager(this);
     this.domainAvailabilityManager = new DomainAvailabilityManager(this);
+    this.miscManager = new MiscellaneousManager(this);
   }
 
   _request = async ({

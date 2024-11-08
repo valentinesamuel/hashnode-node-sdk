@@ -41,7 +41,7 @@ export class HashnodeSDKClient {
   /**
    * The manager for managing miscellaneous operations.
    */
-   public readonly miscManager: MiscellaneousManager;
+  public readonly miscManager: MiscellaneousManager;
 
   /**
    * Creates an instance of HashnodeSDKClient.

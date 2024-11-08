@@ -14,7 +14,8 @@ import {
   GET_POST_COMMENTS,
   GET_POST_LIKERS,
   GET_POST_PUBLICATION_QUERY,
-  GET_POST_QUERY, SEARCH_POSTS_OF_PUBLICATION,
+  GET_POST_QUERY,
+  SEARCH_POSTS_OF_PUBLICATION,
 } from './post.queries';
 
 export class PostManager extends BaseManager {
@@ -158,5 +159,5 @@ export class PostManager extends BaseManager {
       { postId: draftID },
     );
     return res.draft;
-}
+  }
 }

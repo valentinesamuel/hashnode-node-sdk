@@ -80,7 +80,7 @@ export const GET_MY_PUBLICATIONS_QUERY = gql`
               name
               name
               bio {
-                  markdown
+                markdown
               }
               profilePicture
             }

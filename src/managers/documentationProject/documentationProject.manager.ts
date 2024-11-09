@@ -7,9 +7,11 @@ import {
   GET_DOCUMENTATION_PROJECT_GUIDES_QUERY,
   GET_DOCUMENTATION_PROJECT_NAVIGATION_QUERY,
   GET_DOCUMENTATION_PROJECT_PENDING_INVITES,
-  GET_DOCUMENTATION_PROJECT_PUBLISHED_GUIDE_QUERY, GET_DOCUMENTATION_PROJECT_PUBLISHED_GUIDES_QUERY,
+  GET_DOCUMENTATION_PROJECT_PUBLISHED_GUIDE_QUERY,
+  GET_DOCUMENTATION_PROJECT_PUBLISHED_GUIDES_QUERY,
   GET_DOCUMENTATION_PROJECT_QUERY,
-  GET_DOCUMENTATION_PROJECT_V2_MEMBER_QUERY, GET_DOCUMENTATION_PROJECT_VIEWS_QUERY,
+  GET_DOCUMENTATION_PROJECT_V2_MEMBER_QUERY,
+  GET_DOCUMENTATION_PROJECT_VIEWS_QUERY,
   SEARCH_DOCUMENTATION_PROJECT_USERS_QUERY,
 } from './documenationProkect.queries';
 import type {
@@ -69,9 +71,13 @@ export class DocumentationProjectManager extends BaseManager {
   async getDocumentationProjectCustomPage(slug: string) {
     const res = await this.makeRequest<{
       documentationProject: DocumentationProject;
-    }>('getDocumentationProjectCustomPage', GET_DOCUMENTATION_PROJECT_CUSTOM_PAGE_QUERY, {
-      slug,
-    });
+    }>(
+      'getDocumentationProjectCustomPage',
+      GET_DOCUMENTATION_PROJECT_CUSTOM_PAGE_QUERY,
+      {
+        slug,
+      },
+    );
     return res.documentationProject.customPage;
   }
 
@@ -112,7 +118,10 @@ export class DocumentationProjectManager extends BaseManager {
     return res.documentationProject.guides;
   }
 
-  async getDocumentationProjectPublishedGuide(documentationProjectId: string, slug: string,) {
+  async getDocumentationProjectPublishedGuide(
+    documentationProjectId: string,
+    slug: string,
+  ) {
     const res = await this.makeRequest<{
       documentationProject: DocumentationProject;
     }>(
@@ -152,37 +161,71 @@ export class DocumentationProjectManager extends BaseManager {
     return res.documentationProject.defaultGuide;
   }
 
-  async getDocumentationProjectViews(documentationProjectId: string,
-    first: number, after: string, filter: ProjectViewsFilter, groupBy: ProjectViewsGroupBy, sortBy: ProjectViewsSortBy, options: ProjectViewsOptions) {
-    const res = await this.makeRequest<{ documentationProject: DocumentationProject }>(
-      'getDocumentationProjectViews',
-      GET_DOCUMENTATION_PROJECT_VIEWS_QUERY,
-      { id: documentationProjectId, first, after, filter, groupBy, sortBy, options })
-    return res.documentationProject.analytics.views
+  async getDocumentationProjectViews(
+    documentationProjectId: string,
+    first: number,
+    after: string,
+    filter: ProjectViewsFilter,
+    groupBy: ProjectViewsGroupBy,
+    sortBy: ProjectViewsSortBy,
+    options: ProjectViewsOptions,
+  ) {
+    const res = await this.makeRequest<{
+      documentationProject: DocumentationProject;
+    }>('getDocumentationProjectViews', GET_DOCUMENTATION_PROJECT_VIEWS_QUERY, {
+      id: documentationProjectId,
+      first,
+      after,
+      filter,
+      groupBy,
+      sortBy,
+      options,
+    });
+    return res.documentationProject.analytics.views;
   }
 
-  async getDocumentationProjectVisitors(documentationProjectId: string,
-    first: number, after: string, filter: ProjectVisitorsFilter, groupBy: ProjectVisitorsGroupBy, options: ProjectVisitorsOptions) {
-    const res = await this.makeRequest<{ documentationProject: DocumentationProject }>(
-      'getDocumentationProjectViews',
-      GET_DOCUMENTATION_PROJECT_VIEWS_QUERY,
-      { id: documentationProjectId, first, after, filter, groupBy, options })
-    return res.documentationProject.analytics.visitors
+  async getDocumentationProjectVisitors(
+    documentationProjectId: string,
+    first: number,
+    after: string,
+    filter: ProjectVisitorsFilter,
+    groupBy: ProjectVisitorsGroupBy,
+    options: ProjectVisitorsOptions,
+  ) {
+    const res = await this.makeRequest<{
+      documentationProject: DocumentationProject;
+    }>('getDocumentationProjectViews', GET_DOCUMENTATION_PROJECT_VIEWS_QUERY, {
+      id: documentationProjectId,
+      first,
+      after,
+      filter,
+      groupBy,
+      options,
+    });
+    return res.documentationProject.analytics.visitors;
   }
 
   async getDocumentationProjectNavigation() {
-    const res = await this.makeRequest<{ documentationProject: DocumentationProject }>(
+    const res = await this.makeRequest<{
+      documentationProject: DocumentationProject;
+    }>(
       'getDocumentationProjectNavigation',
       GET_DOCUMENTATION_PROJECT_NAVIGATION_QUERY,
-      {})
-    return res.documentationProject.navigation
+      {},
+    );
+    return res.documentationProject.navigation;
   }
 
-  async searchDocumentationProjectUsers(input: DocumentationProjectSearchUsersInput) {
-    const res = await this.makeRequest<{ documentationProject: DocumentationProject }>(
+  async searchDocumentationProjectUsers(
+    input: DocumentationProjectSearchUsersInput,
+  ) {
+    const res = await this.makeRequest<{
+      documentationProject: DocumentationProject;
+    }>(
       'searchDocumentationProjectUsers',
       SEARCH_DOCUMENTATION_PROJECT_USERS_QUERY,
-      { input })
-    return res.documentationProject.searchUsers
+      { input },
+    );
+    return res.documentationProject.searchUsers;
   }
 }

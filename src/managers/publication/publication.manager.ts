@@ -1,6 +1,10 @@
 import type { HashnodeSDKClient } from '../../client';
 import { BaseManager } from '../base.manager';
-import type { Post, Publication, SearchPostsOfPublicationFilter } from '../../generated/gqlQueryTypes';
+import type {
+  Post,
+  Publication,
+  SearchPostsOfPublicationFilter,
+} from '../../generated/gqlQueryTypes';
 import { SEARCH_POSTS_OF_PUBLICATION } from '../posts/post.queries';
 import { GET_PUBLICATION_QUERY } from './publication.queries';
 

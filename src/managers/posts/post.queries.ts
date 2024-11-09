@@ -699,272 +699,272 @@ export const GET_DRAFT_POST_QUERY = gql`
 `;
 
 export const GET_SCHEDULED_POST_QUERY = gql`
-    query getScheduledPost($id: ObjectId!) {
-        scheduledPost(id: $id) {
-            id
-            author {
-                id
-                username
-                name
-                bio {
-                    markdown
-                }
-                profilePicture
-                socialMediaLinks {
-                    website
-                    github
-                    twitter
-                    instagram
-                    facebook
-                    stackoverflow
-                    linkedin
-                    youtube
-                }
-                followersCount
-                followingsCount
-                tagline
-                following
-                followsBack
-            }
-            draft {
-                id
-                slug
-                title
-                subtitle
-                author {
-                    id
-                    username
-                    name
-                    bio {
-                        markdown
-                    }
-                    profilePicture
-                    socialMediaLinks {
-                        website
-                        github
-                        twitter
-                        instagram
-                        facebook
-                        stackoverflow
-                        linkedin
-                        youtube
-                    }
-                    followersCount
-                    followingsCount
-                    tagline
-                    following
-                    followsBack
-                }
-                coAuthors {
-                    id
-                    username
-                    name
-                    bio {
-                        markdown
-                    }
-                    profilePicture
-                    socialMediaLinks {
-                        website
-                        github
-                        twitter
-                        instagram
-                        facebook
-                        stackoverflow
-                        linkedin
-                        youtube
-                    }
-                    followersCount
-                    followingsCount
-                    tagline
-                    following
-                    followsBack
-                }
-                publishAs {
-                    id
-                    username
-                    name
-                    bio {
-                        markdown
-                    }
-                    profilePicture
-                    socialMediaLinks {
-                        website
-                        github
-                        twitter
-                        instagram
-                        facebook
-                        stackoverflow
-                        linkedin
-                        youtube
-                    }
-                    followersCount
-                    followingsCount
-                    tagline
-                    following
-                    followsBack
-                }
-                canonicalUrl
-                publication {
-                    id
-                    title
-                    displayTitle
-                    descriptionSEO
-                    about {
-                        markdown
-                    }
-                    url
-                    canonicalURL
-                    author {
-                        id
-                    }
-                    favicon
-                    headerColor
-                    metaTags
-                }
-                coverImage {
-                    url
-                    attribution
-                    photographer
-                    isAttributionHidden
-                }
-                readTimeInMinutes
-                series {
-                    id
-                    name
-                    slug
-                }
-                content {
-                    markdown
-                }
-                updatedAt
-                settings {
-                    disableComments
-                    stickCoverToBottom
-                    isDelisted
-                }
-                seo {
-                    title
-                    description
-                }
-                ogMetaData {
-                    image
-                }
-                features {
-                    tableOfContents {
-                        isEnabled
-                        items {
-                            id
-                            level
-                            slug
-                            title
-                        }
-                    }
-                }
-                lastBackup {
-                    status
-                    at
-                }
-                lastSuccessfulBackupAt
-                lastFailedBackupAt
-                scheduledDate
-                isSubmittedForReview
-                publishedPost {
-                    id
-                    slug
-                    title
-                    subtitle
-                    author {
-                        id
-                        username
-                        name
-                        bio {
-                            markdown
-                        }
-                        profilePicture
-                        socialMediaLinks {
-                            website
-                            github
-                            twitter
-                            instagram
-                            facebook
-                            stackoverflow
-                            linkedin
-                            youtube
-                        }
-                        followersCount
-                        followingsCount
-                        tagline
-                        following
-                        followsBack
-                    }
-                    coAuthors {
-                        id
-                        username
-                        name
-                        bio {
-                            markdown
-                        }
-                        profilePicture
-                        socialMediaLinks {
-                            website
-                            github
-                            twitter
-                            instagram
-                            facebook
-                            stackoverflow
-                            linkedin
-                            youtube
-                        }
-                        followersCount
-                        followingsCount
-                        tagline
-                        following
-                        followsBack
-                    }
-                }
-            }
-            scheduledDate
-            scheduledBy {
-                id
-                username
-                name
-                bio {
-                    markdown
-                }
-                profilePicture
-                socialMediaLinks {
-                    website
-                    github
-                    twitter
-                    instagram
-                    facebook
-                    stackoverflow
-                    linkedin
-                    youtube
-                }
-                followersCount
-                followingsCount
-                tagline
-                following
-                followsBack
-            }
-            publication {
-                id
-                title
-                displayTitle
-                descriptionSEO
-                about {
-                    markdown
-                }
-                url
-                canonicalURL
-                author {
-                    id
-                }
-                favicon
-                headerColor
-                metaTags
-            }
+  query getScheduledPost($id: ObjectId!) {
+    scheduledPost(id: $id) {
+      id
+      author {
+        id
+        username
+        name
+        bio {
+          markdown
         }
+        profilePicture
+        socialMediaLinks {
+          website
+          github
+          twitter
+          instagram
+          facebook
+          stackoverflow
+          linkedin
+          youtube
+        }
+        followersCount
+        followingsCount
+        tagline
+        following
+        followsBack
+      }
+      draft {
+        id
+        slug
+        title
+        subtitle
+        author {
+          id
+          username
+          name
+          bio {
+            markdown
+          }
+          profilePicture
+          socialMediaLinks {
+            website
+            github
+            twitter
+            instagram
+            facebook
+            stackoverflow
+            linkedin
+            youtube
+          }
+          followersCount
+          followingsCount
+          tagline
+          following
+          followsBack
+        }
+        coAuthors {
+          id
+          username
+          name
+          bio {
+            markdown
+          }
+          profilePicture
+          socialMediaLinks {
+            website
+            github
+            twitter
+            instagram
+            facebook
+            stackoverflow
+            linkedin
+            youtube
+          }
+          followersCount
+          followingsCount
+          tagline
+          following
+          followsBack
+        }
+        publishAs {
+          id
+          username
+          name
+          bio {
+            markdown
+          }
+          profilePicture
+          socialMediaLinks {
+            website
+            github
+            twitter
+            instagram
+            facebook
+            stackoverflow
+            linkedin
+            youtube
+          }
+          followersCount
+          followingsCount
+          tagline
+          following
+          followsBack
+        }
+        canonicalUrl
+        publication {
+          id
+          title
+          displayTitle
+          descriptionSEO
+          about {
+            markdown
+          }
+          url
+          canonicalURL
+          author {
+            id
+          }
+          favicon
+          headerColor
+          metaTags
+        }
+        coverImage {
+          url
+          attribution
+          photographer
+          isAttributionHidden
+        }
+        readTimeInMinutes
+        series {
+          id
+          name
+          slug
+        }
+        content {
+          markdown
+        }
+        updatedAt
+        settings {
+          disableComments
+          stickCoverToBottom
+          isDelisted
+        }
+        seo {
+          title
+          description
+        }
+        ogMetaData {
+          image
+        }
+        features {
+          tableOfContents {
+            isEnabled
+            items {
+              id
+              level
+              slug
+              title
+            }
+          }
+        }
+        lastBackup {
+          status
+          at
+        }
+        lastSuccessfulBackupAt
+        lastFailedBackupAt
+        scheduledDate
+        isSubmittedForReview
+        publishedPost {
+          id
+          slug
+          title
+          subtitle
+          author {
+            id
+            username
+            name
+            bio {
+              markdown
+            }
+            profilePicture
+            socialMediaLinks {
+              website
+              github
+              twitter
+              instagram
+              facebook
+              stackoverflow
+              linkedin
+              youtube
+            }
+            followersCount
+            followingsCount
+            tagline
+            following
+            followsBack
+          }
+          coAuthors {
+            id
+            username
+            name
+            bio {
+              markdown
+            }
+            profilePicture
+            socialMediaLinks {
+              website
+              github
+              twitter
+              instagram
+              facebook
+              stackoverflow
+              linkedin
+              youtube
+            }
+            followersCount
+            followingsCount
+            tagline
+            following
+            followsBack
+          }
+        }
+      }
+      scheduledDate
+      scheduledBy {
+        id
+        username
+        name
+        bio {
+          markdown
+        }
+        profilePicture
+        socialMediaLinks {
+          website
+          github
+          twitter
+          instagram
+          facebook
+          stackoverflow
+          linkedin
+          youtube
+        }
+        followersCount
+        followingsCount
+        tagline
+        following
+        followsBack
+      }
+      publication {
+        id
+        title
+        displayTitle
+        descriptionSEO
+        about {
+          markdown
+        }
+        url
+        canonicalURL
+        author {
+          id
+        }
+        favicon
+        headerColor
+        metaTags
+      }
     }
-`
+  }
+`;

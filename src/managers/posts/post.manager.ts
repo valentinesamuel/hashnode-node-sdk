@@ -6,7 +6,6 @@ import {
   PostCommenterSortBy,
   PostCommentSortBy,
   type PostLikerFilter,
-  type SearchPostsOfPublicationFilter,
 } from '../../generated/gqlQueryTypes';
 import {
   GET_DRAFT_POST_QUERY,
@@ -15,7 +14,7 @@ import {
   GET_POST_LIKERS,
   GET_POST_PUBLICATION_QUERY,
   GET_POST_QUERY,
-  SEARCH_POSTS_OF_PUBLICATION,
+  GET_SCHEDULED_POST_QUERY,
 } from './post.queries';
 
 export class PostManager extends BaseManager {
@@ -124,28 +123,6 @@ export class PostManager extends BaseManager {
   }
 
   /**
-   * Retrieves a paginated list of posts based on search query for a particular publication id.
-   *
-   * @param first - The number of post likers to retrieve
-   * @param after - The cursor for pagination
-   * @param filter - Filter post likers by userIDs
-   *
-   * @return The paginated posts that matches the filter
-   */
-  async searchPostsByPublication(
-    first: number,
-    after: string,
-    filter: SearchPostsOfPublicationFilter,
-  ) {
-    const res = await this.makeRequest<{ post: Post }>(
-      'searchPostsByPublication',
-      SEARCH_POSTS_OF_PUBLICATION,
-      { first, after, filter },
-    );
-    return res.post;
-  }
-
-  /**
    * Retrieves a draft post
    *
    * @param draftID - The draft ID of the draft post
@@ -156,8 +133,24 @@ export class PostManager extends BaseManager {
     const res = await this.makeRequest<{ draft: Draft }>(
       'getDraftPostQuery',
       GET_DRAFT_POST_QUERY,
-      { postId: draftID },
+      { id: draftID },
     );
     return res.draft;
+  }
+
+  /**
+   * Retrieves a scheduled post
+   *
+   * @param scheduledPostID - The ID of the scheduled post
+   *
+   * @return The scheduled post
+   */
+  async getScheduledPost(scheduledPostID: string) {
+    const res = await this.makeRequest<{ post: Post }>(
+      'getScheduledPost',
+      GET_SCHEDULED_POST_QUERY,
+      { id: scheduledPostID },
+    );
+    return res.post;
   }
 }

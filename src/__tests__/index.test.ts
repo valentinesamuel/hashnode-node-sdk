@@ -1,4 +1,3 @@
-
 import { describe, it, expect } from 'vitest';
 import * as HashnodeSDK from '../index';
 

@@ -14,7 +14,7 @@ const client = new HashnodeSDKClient({
 const run = async () => {
   const isDomainAvailable =
     await client.domainAvailabilityManager.checkSubdomainAvailability('test');
-  console.log(user);
+  console.log(isDomainAvailable);
 };
 
 run();

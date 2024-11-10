@@ -1,5 +1,11 @@
 # hashnode-node-sdk
 
+## 2.0.0
+
+### Major Changes
+
+- 18f4d61: Created me, post, publication and user managers
+
 ## 1.3.1
 
 ### Patch Changes

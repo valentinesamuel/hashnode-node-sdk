@@ -1,5 +1,11 @@
 # hashnode-node-sdk
 
+## 3.0.0
+
+### Major Changes
+
+- 28f468b: Made all queries available through the sdk client
+
 ## 2.0.0
 
 ### Major Changes

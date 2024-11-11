@@ -2,6 +2,11 @@
 
 A powerful and flexible Node.js SDK for interacting with the Hashnode GraphQL API. This SDK provides comprehensive access to Hashnode's features including user management, publications, posts, documentation projects, and more.
 
+<div style="padding: 10px; background-color: #cfc42d; color: #000000; border-radius:5px; width:fit-content;">
+  <strong>&#9888;</strong> Only <i>queries</i> are supported as at this time. I am currently working on the <i>mutations</i> 🫠🫠.
+</div>
+
+
 ## Table of Contents
 
 - [Hashnode Node.js SDK](#hashnode-nodejs-sdk)
@@ -29,6 +34,7 @@ A powerful and flexible Node.js SDK for interacting with the Hashnode GraphQL AP
     - [TypeScript Support](#typescript-support)
     - [Rate Limiting](#rate-limiting)
     - [Error Handling Strategies](#error-handling-strategies)
+  - [Roadmap](#roadmap)
   - [Contributing](#contributing)
     - [Development Setup](#development-setup)
     - [Code Style](#code-style)
@@ -339,6 +345,13 @@ try {
 }
 ```
 
+## Roadmap
+I am actively working on mutations
+  - [X] Queries
+  - [X] Error Types
+  - [X] Manager Adapter
+  - [ ] Mutations
+ 
 ## Contributing
 
 ### Development Setup

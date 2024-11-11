@@ -2,6 +2,8 @@ import type { HashnodeSDKClient } from '../../client';
 import { BaseManager } from '../base.manager';
 import {
   type Draft,
+  type FeedFilter,
+  type FeedPostConnection,
   type Post,
   PostCommenterSortBy,
   PostCommentSortBy,
@@ -9,6 +11,7 @@ import {
 } from '../../generated/gqlQueryTypes';
 import {
   GET_DRAFT_POST_QUERY,
+  GET_FEED_POST,
   GET_POST_COMMENTERS,
   GET_POST_COMMENTS,
   GET_POST_LIKERS,
@@ -152,5 +155,16 @@ export class PostManager extends BaseManager {
       { id: scheduledPostID },
     );
     return res.post;
+  }
+
+  async getFeedPosts(first: number, after: string, filter: FeedFilter) {
+    const res = await this.makeRequest<{ feedPost: FeedPostConnection }>(
+      'getFeedPosts',
+      GET_FEED_POST,
+      {
+        first, after, filter
+      }
+    )
+    return res.feedPost
   }
 }

@@ -794,3 +794,70 @@ export const GET_SCHEDULED_POST_QUERY = gql`
     }
   }
 `;
+
+export const GET_FEED_POST = gql`
+query getFeedPost($first: Int!, $after: String, $filter: FeedFilter!) {
+  feed(first: $first, after: $after, filter: $filter) {
+    edges {
+      node {
+        id
+        slug
+        title
+        subtitle
+        author {
+          id
+          username
+          name
+          bio {
+            markdown
+          }
+          profilePicture
+          socialMediaLinks {
+            website
+            github
+            twitter
+            instagram
+            facebook
+            stackoverflow
+            linkedin
+            youtube
+          }
+          followersCount
+          followingsCount
+          tagline
+          following
+          followsBack
+        }
+        coAuthors {
+          id
+          username
+          name
+          bio {
+            markdown
+          }
+          profilePicture
+          socialMediaLinks {
+            website
+            github
+            twitter
+            instagram
+            facebook
+            stackoverflow
+            linkedin
+            youtube
+          }
+          followersCount
+          followingsCount
+          tagline
+          following
+          followsBack
+        }
+      }
+    }
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+  }
+}
+`

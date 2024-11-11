@@ -280,184 +280,180 @@ export const GET_PUBLICATION_QUERY = gql`
 `;
 
 export const SEARCH_POSTS_OF_PUBLICATION = gql`
-  query SearchPostOfPublication(
-    $first: Int!
-    $after: String
-    $filter: SearchPostsOfPublicationFilter!
-  ) {
-    searchPostsOfPublication(first: $first, after: $after, filter: $filter) {
-      edges {
-        node {
+query SearchPostOfPublication($first: Int!, $after: String, $filter: SearchPostsOfPublicationFilter!) {
+  searchPostsOfPublication(first: $first, after: $after, filter: $filter) {
+    edges {
+      node {
+        id
+        slug
+        content {
+          markdown
+        }
+        previousSlugs
+        title
+        subtitle
+        author {
           id
-          slug
-          content {
+          username
+          name
+          bio {
             markdown
           }
-          previousSlugs
+          profilePicture
+          socialMediaLinks {
+            website
+            github
+            twitter
+            instagram
+            facebook
+            stackoverflow
+            linkedin
+            youtube
+          }
+          followersCount
+          followingsCount
+          tagline
+          following
+          followsBack
+        }
+        coAuthors {
+          id
+          username
+          name
+          bio {
+            markdown
+          }
+          profilePicture
+          socialMediaLinks {
+            website
+            github
+            twitter
+            instagram
+            facebook
+            stackoverflow
+            linkedin
+            youtube
+          }
+          followersCount
+          followingsCount
+          tagline
+          following
+          followsBack
+        }
+        tags {
+          id
+          name
+          slug
+          logo
+          tagline
+        }
+        url
+        canonicalUrl
+        publication {
+          id
           title
-          subtitle
-          author {
-            id
-            username
-            name
-            bio {
-              markdown
-            }
-            profilePicture
-            socialMediaLinks {
-              website
-              github
-              twitter
-              instagram
-              facebook
-              stackoverflow
-              linkedin
-              youtube
-            }
-            followersCount
-            followingsCount
-            tagline
-            following
-            followsBack
-          }
-          coAuthors {
-            id
-            username
-            name
-            bio {
-              markdown
-            }
-            profilePicture
-            socialMediaLinks {
-              website
-              github
-              twitter
-              instagram
-              facebook
-              stackoverflow
-              linkedin
-              youtube
-            }
-            followersCount
-            followingsCount
-            tagline
-            following
-            followsBack
-          }
-          tags {
-            id
-            name
-            slug
-            logo
-            tagline
+          displayTitle
+          descriptionSEO
+          about {
+            markdown
           }
           url
-          canonicalUrl
-          publication {
+          canonicalURL
+          author {
             id
-            title
-            displayTitle
-            descriptionSEO
-            about {
-              markdown
-            }
-            url
-            canonicalURL
-            author {
+          }
+          favicon
+          headerColor
+          metaTags
+        }
+        coverImage {
+          url
+          isPortrait
+          attribution
+          photographer
+          isAttributionHidden
+        }
+        brief
+        readTimeInMinutes
+        views
+        series {
+          id
+          name
+        }
+        reactionCount
+        responseCount
+        replyCount
+        featured
+        bookmarked
+        featuredAt
+        preferences {
+          pinnedToBlog
+          disableComments
+          stickCoverToBottom
+          isDelisted
+        }
+        seo {
+          title
+          description
+        }
+        ogMetaData {
+          image
+        }
+        hasLatexInPost
+        isFollowed
+        isAutoPublishedFromRSS
+        features {
+          tableOfContents {
+            isEnabled
+            items {
               id
+              level
+              slug
+              title
+              parentId
             }
-            favicon
-            headerColor
-            metaTags
           }
-          coverImage {
-            url
-            isPortrait
-            attribution
-            photographer
-            isAttributionHidden
-          }
-          brief
-          readTimeInMinutes
-          views
-          series {
-            id
-            name
-          }
-          reactionCount
-          responseCount
-          replyCount
-          featured
-          bookmarked
-          featuredAt
-          preferences {
-            pinnedToBlog
-            disableComments
-            stickCoverToBottom
-            isDelisted
-          }
-          seo {
-            title
-            description
-          }
-          ogMetaData {
-            image
-          }
-          hasLatexInPost
-          isFollowed
-          isAutoPublishedFromRSS
-          features {
-            tableOfContents {
-              isEnabled
-              items {
-                id
-                level
-                slug
-                title
-                parentId
-              }
+          badges {
+            isEnabled
+            items {
+              id
+              type
             }
-            badges {
-              isEnabled
-              items {
-                id
-                type
-              }
+          }
+          tableOfContents {
+            items {
+              id
+              level
+              slug
+              title
+              parentId
             }
-            tableOfContents {
-              items {
-                id
-                level
-                slug
-                title
-                parentId
-              }
-              isEnabled
-            }
-            badges {
-              isEnabled
-              items {
-                id
-                type
-              }
+            isEnabled
+          }
+          badges {
+            isEnabled
+            items {
+              id
+              type
             }
           }
         }
-        cursor
       }
-      pageInfo {
-        hasNextPage
-        endCursor
-      }
+      cursor
+    }
+    pageInfo {
+      hasNextPage
+      endCursor
     }
   }
-`;
+}
+`
 
 export const GET_PUBLICATION_PENDING_INVITES = gql`
   query getPublicationPendingInvites(
-    $id: ObjectId
-    $host: String
-    $pageSize: Int!
+    $id: ObjectId,
+    $host: String,
+    $pageSize: Int!,
     $page: Int!
   ) {
     publication(id: $id, host: $host) {

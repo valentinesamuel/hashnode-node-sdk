@@ -6,7 +6,6 @@ A powerful and flexible Node.js SDK for interacting with the Hashnode GraphQL AP
   <strong>&#9888;</strong> Only <i>queries</i> are supported as at this time. I am currently working on the <i>mutations</i> 🫠🫠.
 </div>
 
-
 ## Table of Contents
 
 - [Hashnode Node.js SDK](#hashnode-nodejs-sdk)
@@ -346,12 +345,14 @@ try {
 ```
 
 ## Roadmap
+
 I am actively working on mutations
-  - [X] Queries
-  - [X] Error Types
-  - [X] Manager Adapter
-  - [ ] Mutations
- 
+
+- [x] Queries
+- [x] Error Types
+- [x] Manager Adapter
+- [ ] Mutations
+
 ## Contributing
 
 ### Development Setup

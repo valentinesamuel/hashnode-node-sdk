@@ -85,6 +85,15 @@ export class HashnodeSDKClient {
     this.postManager = new PostManager(this);
   }
 
+  /**
+   * Makes a GraphQL request to the Hashnode API
+   * @private
+   * @param {Object} params - The request parameters
+   * @param {string} params.query - The GraphQL query string
+   * @param {Record<string, any>} [params.variables] - Optional variables for the GraphQL query
+   * @returns {Promise<any>} The parsed JSON response from the API
+   * @throws {Error} If the GraphQL request fails
+   */
   _request = async ({
     query,
     variables,

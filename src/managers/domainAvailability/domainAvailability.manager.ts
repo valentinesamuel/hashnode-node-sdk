@@ -6,9 +6,18 @@ import {
   CHECK_SUBDOMAIN_AVAILABILITY_QUERY,
 } from './domainAvailability.queries';
 
+/**
+ * Manages domain availability operations for Hashnode SDK.
+ * 
+ * This class extends BaseManager and provides methods to check availability
+ * of subdomains and custom domains on Hashnode.
+ * 
+ * @extends {BaseManager}
+ */
 export class DomainAvailabilityManager extends BaseManager {
   /**
    * Creates an instance of DomainAvailabilityManager.
+   * 
    * @param client - The HashnodeSDKClient instance.
    */
   constructor(client: HashnodeSDKClient) {
@@ -17,7 +26,9 @@ export class DomainAvailabilityManager extends BaseManager {
 
   /**
    * Retrieves the availability of a subdomain.
+   * 
    * @param subdomain - The subdomain to check.
+   * 
    * @returns A promise that resolves to the availability of the subdomain.
    */
   async checkSubdomainAvailability(subdomain: string) {
@@ -31,7 +42,9 @@ export class DomainAvailabilityManager extends BaseManager {
 
   /**
    * Retrieves the availability of a custom domain.
+   * 
    * @param input - The CheckCustomDomainAvailabilityInput object.
+   * 
    * @returns A promise that resolves to the availability of the custom domain.
    */
   async checkCustomDomainAvailability(

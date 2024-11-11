@@ -43,6 +43,7 @@ export class UserManager extends BaseManager {
    * Retrieves user information by username.
    *
    * @param username - The username of the user.
+   * 
    * @returns The user information.
    */
   async getUser(username: string) {
@@ -60,6 +61,7 @@ export class UserManager extends BaseManager {
    * @param username - The username of the user.
    * @param page - The page number for pagination.
    * @param pageSize - The number of items per page.
+   * 
    * @returns The user followers.
    */
   async getUserFollowers(username: string, page: number, pageSize: number) {
@@ -77,6 +79,7 @@ export class UserManager extends BaseManager {
    * @param username - The username of the user.
    * @param page - The page number for pagination.
    * @param pageSize - The number of items per page.
+   * 
    * @returns The followed users.
    */
   async getFollowedUsers(username: string, page: number, pageSize: number) {
@@ -94,6 +97,7 @@ export class UserManager extends BaseManager {
    * @param username - The username of the user.
    * @param page - The page number for pagination.
    * @param pageSize - The number of items per page.
+   * 
    * @returns The user's tech stack.
    */
   async getUserTechStack(username: string, page: number, pageSize: number) {
@@ -111,6 +115,7 @@ export class UserManager extends BaseManager {
    * @param username - The username of the user.
    * @param page - The page number for pagination.
    * @param pageSize - The number of items per page.
+   * 
    * @returns The user's badges.
    */
   async getUserBadges(username: string, page: number, pageSize: number) {
@@ -130,6 +135,7 @@ export class UserManager extends BaseManager {
    * @param after - The cursor for pagination.
    * @param filter - The filter criteria for publications.
    * @param sortBy - The sorting criteria for publications.
+   * 
    * @returns The user's publications.
    */
   async getUserPublications(
@@ -155,6 +161,7 @@ export class UserManager extends BaseManager {
    * @param after - The cursor for pagination.
    * @param filter - The filter criteria for posts.
    * @param sortBy - The sorting criteria for posts.
+   * 
    * @returns The user's posts.
    */
   async getUserPosts(
@@ -176,6 +183,7 @@ export class UserManager extends BaseManager {
    * Retrieves the tags followed by a user.
    *
    * @param username - The username of the user.
+   * 
    * @returns The tags followed by the user.
    */
   async getUserFollowedTags(username: string) {

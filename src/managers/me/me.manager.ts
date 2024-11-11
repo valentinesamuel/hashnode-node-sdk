@@ -27,7 +27,7 @@ import {
 /**
  * Manages operations related to the authenticated user.
  * Extends the BaseManager class.
- * 
+ *
  *  @extends {BaseManager}
  */
 export class MeManager extends BaseManager {
@@ -41,7 +41,7 @@ export class MeManager extends BaseManager {
 
   /**
    * Retrieves the authenticated user's details.
-   * 
+   *
    * @returns A promise that resolves to the authenticated user's details.
    */
   async getMe() {
@@ -51,7 +51,7 @@ export class MeManager extends BaseManager {
 
   /**
    * Retrieves the authenticated user's email notification preferences.
-   * 
+   *
    * @returns A promise that resolves to the authenticated user's email notification preferences.
    */
   async getMyEmailNotificationPreferences() {
@@ -64,12 +64,12 @@ export class MeManager extends BaseManager {
 
   /**
    * Retrieves the authenticated user's publications.
-   * 
+   *
    * @param first - The number of publications to retrieve.
    * @param after - The cursor for pagination.
    * @param filter - The filter to apply to the publications.
    * @param sortBy - The sorting criteria for the publications.
-   * 
+   *
    * @returns A promise that resolves to the authenticated user's publications.
    */
   async getMyPublications(
@@ -88,12 +88,12 @@ export class MeManager extends BaseManager {
 
   /**
    * Retrieves the authenticated user's posts.
-   * 
+   *
    * @param first - The number of posts to retrieve.
    * @param after - The cursor for pagination.
    * @param filter - The filter to apply to the posts.
    * @param sortBy - The sorting criteria for the posts.
-   * 
+   *
    * @returns A promise that resolves to the authenticated user's posts.
    */
   async getMyPosts(
@@ -112,7 +112,7 @@ export class MeManager extends BaseManager {
 
   /**
    * Retrieves the authenticated user's badges.
-   * 
+   *
    * @returns A promise that resolves to the authenticated user's badges.
    */
   async getMyBadges() {
@@ -125,10 +125,10 @@ export class MeManager extends BaseManager {
 
   /**
    * Retrieves the authenticated user's tech stack.
-   * 
+   *
    * @param page - The page number for pagination.
    * @param pageSize - The number of items per page.
-   * 
+   *
    * @returns A promise that resolves to the authenticated user's tech stack.
    */
   async getMyTechStack(page: number, pageSize: number) {
@@ -142,10 +142,10 @@ export class MeManager extends BaseManager {
 
   /**
    * Retrieves the users followed by the authenticated user.
-   * 
+   *
    * @param page - The page number for pagination.
    * @param pageSize - The number of items per page.
-   * 
+   *
    * @returns A promise that resolves to the users followed by the authenticated user.
    */
   async getMyFollowedUsers(page: number, pageSize: number) {
@@ -159,10 +159,10 @@ export class MeManager extends BaseManager {
 
   /**
    * Retrieves the followers of the authenticated user.
-   * 
+   *
    * @param page - The page number for pagination.
    * @param pageSize - The number of items per page.
-   * 
+   *
    * @returns A promise that resolves to the followers of the authenticated user.
    */
   async getUserFollowers(page: number, pageSize: number) {

@@ -20,6 +20,12 @@ import {
   GET_SCHEDULED_POST_QUERY,
 } from './post.queries';
 
+/**
+ * A manager class for handling post-related operations via the Hashnode SDK.
+ * Extends the BaseManager class to provide post-specific functionality.
+ * 
+ * @extends BaseManager
+ */
 export class PostManager extends BaseManager {
   /**
    * Creates an instance of PostManager.
@@ -85,13 +91,16 @@ export class PostManager extends BaseManager {
     return res.post.comments;
   }
 
+
   /**
-   * Retrieves the commenters of a post
-   *
-   * @param postId - The ID of the post
-   * @param first - The number of comments to retrieve
-   * @param after - The cursor for pagination
-   * @param sortBy - Sort comments by TOP or RECENT
+   * Retrieves commenters for a specific post with pagination and sorting options.
+   * 
+   * @param postId - The unique identifier of the post to get commenters from
+   * @param first - The number of commenters to retrieve in one request
+   * @param after - The cursor for pagination, representing the position after which to fetch commenters
+   * @param sortBy - The sorting criteria for the commenters list
+   * 
+   * @returns A Promise that resolves to an array of commenters for the specified post
    */
   async getPostCommenters(
     postId: string,

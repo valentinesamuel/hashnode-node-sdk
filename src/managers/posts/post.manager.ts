@@ -23,7 +23,7 @@ import {
 /**
  * A manager class for handling post-related operations via the Hashnode SDK.
  * Extends the BaseManager class to provide post-specific functionality.
- * 
+ *
  * @extends BaseManager
  */
 export class PostManager extends BaseManager {
@@ -91,15 +91,14 @@ export class PostManager extends BaseManager {
     return res.post.comments;
   }
 
-
   /**
    * Retrieves commenters for a specific post with pagination and sorting options.
-   * 
+   *
    * @param postId - The unique identifier of the post to get commenters from
    * @param first - The number of commenters to retrieve in one request
    * @param after - The cursor for pagination, representing the position after which to fetch commenters
    * @param sortBy - The sorting criteria for the commenters list
-   * 
+   *
    * @returns A Promise that resolves to an array of commenters for the specified post
    */
   async getPostCommenters(

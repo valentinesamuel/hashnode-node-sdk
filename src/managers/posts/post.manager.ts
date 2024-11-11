@@ -33,6 +33,7 @@ export class PostManager extends BaseManager {
    * Retrieves a post by its ID.
    *
    * @param postId - The ID of the post.
+   *
    * @returns A promise that resolves to the post.
    */
   async getPost(postId: string) {
@@ -48,6 +49,7 @@ export class PostManager extends BaseManager {
    * Retrieves the publication of a post.
    *
    * @param postId - The ID of the post.
+   *
    * @returns A promise that resolves to the publication of the post.
    */
   async getPostPublication(postId: string) {
@@ -60,12 +62,14 @@ export class PostManager extends BaseManager {
   }
 
   /**
-   * Retrieves the comments of a post
+   * Retrieves comments for a specific post
    *
-   * @param postId - The ID of the post
+   * @param postId - The unique identifier of the post
    * @param first - The number of comments to retrieve
-   * @param after - The cursor for pagination
-   * @param sortBy - Sort comments by TOP or RECENT
+   * @param after - Cursor for pagination
+   * @param sortBy - Sort criteria for the comments
+   *
+   * @returns Promise containing an array of comments for the specified post
    */
   async getPostComments(
     postId: string,
@@ -104,12 +108,14 @@ export class PostManager extends BaseManager {
   }
 
   /**
-   * Retrieves the likers of a post
+   * Retrieves users who have liked a specific post
    *
-   * @param postId - The ID of the post
-   * @param first - The number of post likers to retrieve
-   * @param after - The cursor for pagination
-   * @param filter - Filter post likers by userIDs
+   * @param postId - The unique identifier of the post
+   * @param first - The number of likers to return
+   * @param after - Cursor for pagination, specifying where to start fetching likers
+   * @param filter - Filter criteria for post likers
+   *
+   * @returns Promise containing an array of users who liked the post
    */
   async getPostLikers(
     postId: string,
@@ -157,6 +163,15 @@ export class PostManager extends BaseManager {
     return res.post;
   }
 
+  /**
+   * Retrieves feed posts based on specified parameters
+   *
+   * @param first - The number of posts to retrieve
+   * @param after - Cursor for pagination, representing the ID after which to fetch posts
+   * @param filter - Filter criteria for the feed posts
+   *
+   * @returns Promise resolving to a FeedPostConnection object containing the feed posts
+   */
   async getFeedPosts(first: number, after: string, filter: FeedFilter) {
     const res = await this.makeRequest<{ feedPost: FeedPostConnection }>(
       'getFeedPosts',

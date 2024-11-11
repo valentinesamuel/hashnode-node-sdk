@@ -26,10 +26,10 @@ export class MiscellaneousManager extends BaseManager {
 
   /**
    * Returns the top users who have most actively participated in discussions by commenting in the last 7 days
-   * 
+   *
    * @param after - The cursor to start the query from.
    * @param first - The number of users to return.
-   * 
+   *
    * @returns The top users who have most actively participated in discussions by commenting in the last 7 days.
    */
   async getTopCommenters(first: number, after?: string) {
@@ -43,7 +43,7 @@ export class MiscellaneousManager extends BaseManager {
    * Returns tag details by its slug
    *
    * @param slug - The slug of the tag.
-   * 
+   *
    * @returns The tag details.
    */
   async getTagBySlug(slug: string) {

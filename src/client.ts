@@ -2,6 +2,8 @@ import { DocumentationProjectManager } from './managers/documentationProject/doc
 import { DomainAvailabilityManager } from './managers/domainAvailability/domainAvailability.manager';
 import { MeManager } from './managers/me/me.manager';
 import { MiscellaneousManager } from './managers/misc/misc.manager';
+import { PostManager } from './managers/posts/post.manager';
+import { PublicationManager } from './managers/publication/publication.manager';
 import { UserManager } from './managers/user/user.manager';
 
 interface ClientOptions {
@@ -44,7 +46,20 @@ export class HashnodeSDKClient {
    */
   public readonly miscManager: MiscellaneousManager;
 
-  public readonly DocumentationProjectManager: DocumentationProjectManager;
+  /**
+   * The manager for managing documentationProject operations.
+   */
+  public readonly documentationProjectManager: DocumentationProjectManager;
+
+  /**
+   * The manager for managing publication related operations
+   */
+  public readonly publicationManager: PublicationManager;
+
+  /**
+   * The manager for managing post related operations
+   */
+  public readonly postManager: PostManager;
 
   /**
    * Creates an instance of HashnodeSDKClient.
@@ -65,7 +80,9 @@ export class HashnodeSDKClient {
     this.meManager = new MeManager(this);
     this.domainAvailabilityManager = new DomainAvailabilityManager(this);
     this.miscManager = new MiscellaneousManager(this);
-    this.DocumentationProjectManager = new DocumentationProjectManager(this);
+    this.documentationProjectManager = new DocumentationProjectManager(this);
+    this.publicationManager = new PublicationManager(this);
+    this.postManager = new PostManager(this);
   }
 
   _request = async ({

@@ -13,7 +13,7 @@ import {
   GET_DOCUMENTATION_PROJECT_V2_MEMBER_QUERY,
   GET_DOCUMENTATION_PROJECT_VIEWS_QUERY,
   SEARCH_DOCUMENTATION_PROJECT_USERS_QUERY,
-} from './documenationProkect.queries';
+} from './documenationProject.queries';
 import type {
   DocumentationProject,
   DocumentationProjectMemberConnectionFilter,

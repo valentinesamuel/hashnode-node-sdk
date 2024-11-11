@@ -162,9 +162,11 @@ export class PostManager extends BaseManager {
       'getFeedPosts',
       GET_FEED_POST,
       {
-        first, after, filter
-      }
-    )
-    return res.feedPost
+        first,
+        after,
+        filter,
+      },
+    );
+    return res.feedPost;
   }
 }

@@ -6,8 +6,13 @@ import {
 } from './misc.queries';
 import type {
   CommenterUserConnection,
+  FollowTagsInput,
+  FollowTagsPayload,
   Tag,
+  UnfollowTagsInput,
+  UnfollowTagsPayload,
 } from '../../generated/gqlQueryTypes';
+import { FOLLOW_TAGS_MUTATION, UNFOLLOW_TAGS_MUTATION } from './misc.mutations';
 
 /**
  * Manages random operations.
@@ -54,4 +59,44 @@ export class MiscellaneousManager extends BaseManager {
     );
     return res.tag;
   }
+
+  /**
+  * 
+  * ===================MUTATIONS===================
+  * 
+ */
+
+  /**
+   * Follow tags
+   *
+   * @param input - The followTag input.
+   *
+   * @returns The tag details.
+   */
+  async followTags(input: FollowTagsInput) {
+    const res = await this.makeRequest<{ followTag: FollowTagsPayload }>(
+      'followTaga',
+      FOLLOW_TAGS_MUTATION,
+      { input },
+    );
+    return res.followTag;
+  }
+
+  /**
+   * Unfollow tags
+   * 
+   * @param input - The UnFollowTag input.
+   * 
+   * @returns The tag details.
+  */
+  async unfollowTags(input: UnfollowTagsInput) {
+    const res = await this.makeRequest<{ unfollowTag: UnfollowTagsPayload }>(
+      'unfollowTags',
+      UNFOLLOW_TAGS_MUTATION,
+      { input },
+    );
+    return res.unfollowTag;
+  }
+
+
 }

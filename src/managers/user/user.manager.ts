@@ -5,6 +5,7 @@ import {
   UserPublicationsSort,
   type Badge,
   type Tag,
+  type ToggleFollowUserPayload,
   type User,
   type UserConnection,
   type UserPostConnection,
@@ -23,6 +24,7 @@ import {
   GET_USER_QUERY,
   GET_USER_TECHSTACK_QUERY,
 } from './user.queries';
+import { TOGGLE_FOLLOW_USER_MUTATION } from './user.mutations';
 
 /**
  * Manages user-related operations.
@@ -191,6 +193,29 @@ export class UserManager extends BaseManager {
       'getUserFollowedTags',
       GET_USER_FOLLOWED_TAGS_QUERY,
       { username },
+    );
+    return res.user;
+  }
+
+  /**
+   * 
+   * ===================MUTATIONS===================
+   * 
+  */
+
+  /**
+   * Toggles the follow status of a user.
+   *
+   * @param id - The ID of the user.
+   * @param username - The username of the user.
+   *
+   * @returns The user information.
+   */
+  async toggleFollowUser(id: string, username: string) {
+    const res = await this.makeRequest<{ user: ToggleFollowUserPayload }>(
+      'toggleFollowUser',
+      TOGGLE_FOLLOW_USER_MUTATION,
+      { id, username },
     );
     return res.user;
   }

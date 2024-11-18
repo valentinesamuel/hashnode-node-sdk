@@ -9,6 +9,22 @@ import type {
   UpdatePostPayload,
   AddPostToSeriesPayload,
   PublishPostPayload,
+  LikeCommentInput,
+  LikeCommentPayload,
+  LikeReplyInput,
+  LikeReplyPayload,
+  AddCommentInput,
+  AddCommentPayload,
+  UpdateCommentInput,
+  UpdateCommentPayload,
+  RemoveCommentInput,
+  RemoveCommentPayload,
+  AddReplyInput,
+  AddReplyPayload,
+  UpdateReplyInput,
+  UpdateReplyPayload,
+  RemoveReplyInput,
+  RemoveReplyPayload,
 } from './../../generated/gqlQueryTypes';
 import type { HashnodeSDKClient } from '../../client';
 import { BaseManager } from '../base.manager';
@@ -22,7 +38,9 @@ import {
   type PostLikerFilter,
 } from '../../generated/gqlQueryTypes';
 import {
+  ADD_COMMENT_MUTATION,
   ADD_POST_TO_SERIES_MUTATION,
+  ADD_REPLY_MUTATION,
   GET_DRAFT_POST_QUERY,
   GET_FEED_POST,
   GET_POST_COMMENTERS,
@@ -31,10 +49,16 @@ import {
   GET_POST_PUBLICATION_QUERY,
   GET_POST_QUERY,
   GET_SCHEDULED_POST_QUERY,
+  LIKE_COMMENT_MUTATION,
   LIKE_POST_MUTATION,
+  LIKE_REPLY_MUTATION,
   PUBLISH_POST_MUTATION,
+  REMOVE_COMMENT_MUTATION,
   REMOVE_POST_MUTATION,
+  REMOVE_REPLY_MUTATION,
+  UPDATE_COMMENT_MUTATION,
   UPDATE_POST_MUTATION,
+  UPDATE_REPLY_MUTATION,
 } from './post.queries';
 
 /**
@@ -210,6 +234,8 @@ export class PostManager extends BaseManager {
     return res.feedPost;
   }
 
+  // =======================MUTATIONS=======================
+
   /**
    * Publish a post
    *
@@ -298,5 +324,145 @@ export class PostManager extends BaseManager {
       },
     );
     return res.likedPost;
+  }
+
+  /**
+   * Like a comment
+   *
+   * @param {LikeCommentInput} input -  The like comment input
+   *
+   * @returns - The liked comment
+   */
+  async likeComment(input: LikeCommentInput) {
+    const res = await this.makeRequest<{ likedComment: LikeCommentPayload }>(
+      'likeComment',
+      LIKE_COMMENT_MUTATION,
+      {
+        input,
+      },
+    );
+    return res.likedComment.comment;
+  }
+
+  /**
+   * Like a comment
+   *
+   * @param {LikeCommentInput} input -  The like comment input
+   *
+   * @returns - The liked comment
+   */
+  async likeReply(input: LikeReplyInput) {
+    const res = await this.makeRequest<{ likedReply: LikeReplyPayload }>(
+      'likeReply',
+      LIKE_REPLY_MUTATION,
+      {
+        input,
+      },
+    );
+    return res.likedReply.reply;
+  }
+
+  /**
+   * Add a comment
+   *
+   * @param {AddCommentInput} input -  The add comment input
+   *
+   * @returns - The added comment
+   */
+  async addComment(input: AddCommentInput) {
+    const res = await this.makeRequest<{ addedComment: AddCommentPayload }>(
+      'addComment',
+      ADD_COMMENT_MUTATION,
+      {
+        input,
+      },
+    );
+    return res.addedComment.comment;
+  }
+
+  /**
+   * Update a comment
+   *
+   * @param {UpdateCommentInput} input -  The update comment input
+   *
+   * @returns - The updated comment
+   */
+  async updateComment(input: UpdateCommentInput) {
+    const res = await this.makeRequest<{
+      updatedComment: UpdateCommentPayload;
+    }>('updateComment', UPDATE_COMMENT_MUTATION, {
+      input,
+    });
+    return res.updatedComment.comment;
+  }
+
+  /**
+   * Remove a comment
+   *
+   * @param {RemoveCommentInput} input -  The remove comment input
+   *
+   * @returns - The removed comment
+   */
+  async removeComment(input: RemoveCommentInput) {
+    const res = await this.makeRequest<{
+      removedComment: RemoveCommentPayload;
+    }>('removeComment', REMOVE_COMMENT_MUTATION, {
+      input,
+    });
+    return res.removedComment.comment;
+  }
+
+  /**
+   * Add a reply
+   *
+   * @param {AddReplyInput} input -  The add reply input
+   *
+   * @returns - The added reply
+   */
+  async addReply(input: AddReplyInput) {
+    const res = await this.makeRequest<{ addedReply: AddReplyPayload }>(
+      'addReply',
+      ADD_REPLY_MUTATION,
+      {
+        input,
+      },
+    );
+    return res.addedReply.reply;
+  }
+
+  /**
+   * Updated a reply
+   *
+   * @param {UpdateReplyInput} input -  The update reply input
+   *
+   * @returns - The updated reply
+   */
+  async updateReply(input: UpdateReplyInput) {
+    const res = await this.makeRequest<{ updatedReply: UpdateReplyPayload }>(
+      'updateReply',
+      UPDATE_REPLY_MUTATION,
+      {
+        input,
+      },
+    );
+    return res.updatedReply.reply;
+  }
+
+  /**
+   * Removed a reply
+   *
+   * @param {UpdateReplyInput} input -  The remove reply input
+   *
+   * @returns - The removed reply
+   */
+  async removeReply(input: RemoveReplyInput) {
+    const res = await this.makeRequest<{ removedReply: RemoveReplyPayload }>(
+      'removeReply',
+      REMOVE_REPLY_MUTATION,
+      {
+        input,
+      },
+    );
+    return res.removedReply.reply;
   }
 }

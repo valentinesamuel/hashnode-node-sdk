@@ -61,10 +61,10 @@ export class MiscellaneousManager extends BaseManager {
   }
 
   /**
-  * 
-  * ===================MUTATIONS===================
-  * 
- */
+   *
+   * ===================MUTATIONS===================
+   *
+   */
 
   /**
    * Follow tags
@@ -84,11 +84,11 @@ export class MiscellaneousManager extends BaseManager {
 
   /**
    * Unfollow tags
-   * 
+   *
    * @param input - The UnFollowTag input.
-   * 
+   *
    * @returns The tag details.
-  */
+   */
   async unfollowTags(input: UnfollowTagsInput) {
     const res = await this.makeRequest<{ unfollowTag: UnfollowTagsPayload }>(
       'unfollowTags',
@@ -97,6 +97,4 @@ export class MiscellaneousManager extends BaseManager {
     );
     return res.unfollowTag;
   }
-
-
 }

@@ -38,7 +38,12 @@ import {
   GET_PUBLICATION_STATIC_PAGES_QUERY,
   SEARCH_POSTS_OF_PUBLICATION,
 } from './publication.queries';
-import { RECOMMEND_PUBLICATIONS_MUTATION, TOGGLE_ALLOW_CONTRIBUTOR_EDITS_MUTATION, TOGGLE_GPT_BOT_CRAWLING_MUTATION, TOGGLE_TEXT_SELECTION_SHARER_MUTATION } from './publication.mutations';
+import {
+  RECOMMEND_PUBLICATIONS_MUTATION,
+  TOGGLE_ALLOW_CONTRIBUTOR_EDITS_MUTATION,
+  TOGGLE_GPT_BOT_CRAWLING_MUTATION,
+  TOGGLE_TEXT_SELECTION_SHARER_MUTATION,
+} from './publication.mutations';
 
 export class PublicationManager extends BaseManager {
   /**
@@ -525,89 +530,81 @@ export class PublicationManager extends BaseManager {
     return res.publication.pinnedPost;
   }
 
-
   // =======================MUTATIONS=======================
 
-
   /**
- * Recommend publications
- * 
- * @param input - The RecommendPublicationsInput.
- * 
- * @returns The recommended publications.
-*/
+   * Recommend publications
+   *
+   * @param input - The RecommendPublicationsInput.
+   *
+   * @returns The recommended publications.
+   */
   async recommendPublication(input: RecommendPublicationsInput) {
-    const res = await this.makeRequest<{ recommendPublications: RecommendPublicationsPayload }>(
-      'recommendPublication',
-      RECOMMEND_PUBLICATIONS_MUTATION,
-      { input },
-    );
+    const res = await this.makeRequest<{
+      recommendPublications: RecommendPublicationsPayload;
+    }>('recommendPublication', RECOMMEND_PUBLICATIONS_MUTATION, { input });
     return res.recommendPublications.recommendedPublications;
   }
 
   /**
    * Remove recommendation
-   * 
+   *
    * @param {RemoveRecommendationInput} input - The RemoveRecommendationInput.
-   * 
+   *
    * @returns The recommended publications.
-  */
+   */
   async removeRecommendation(input: RemoveRecommendationInput) {
-    const res = await this.makeRequest<{ recommendPublications: RemoveRecommendationPayload }>(
-      'removeRecommendation',
-      RECOMMEND_PUBLICATIONS_MUTATION,
-      { input },
-    );
+    const res = await this.makeRequest<{
+      recommendPublications: RemoveRecommendationPayload;
+    }>('removeRecommendation', RECOMMEND_PUBLICATIONS_MUTATION, { input });
     return res.recommendPublications.recommendedPublication;
   }
 
   /**
    * Toggle allowContributorEdits
-   * 
+   *
    * @param {ToggleAlloqContrinutorEditsInput} input - The ToggleAlloqContrinutorEditsInput!
-   * 
+   *
    * @returns The publication details.
-  */
+   */
   async toggleAllowContributorEdits(input: ToggleAllowContributorEditsInput) {
-    const res = await this.makeRequest<{ toggleAllowContributorEdits: ToggleAllowContributorEditsPayload }>(
-      'toggleAllowContributorEdits',
-      TOGGLE_ALLOW_CONTRIBUTOR_EDITS_MUTATION,
-      { input },
-    );
-    return res.toggleAllowContributorEdits.publication
+    const res = await this.makeRequest<{
+      toggleAllowContributorEdits: ToggleAllowContributorEditsPayload;
+    }>('toggleAllowContributorEdits', TOGGLE_ALLOW_CONTRIBUTOR_EDITS_MUTATION, {
+      input,
+    });
+    return res.toggleAllowContributorEdits.publication;
   }
 
   /**
    * Toggle textSelectionSharerMutation
-   * 
+   *
    * @param { ToggleTextSelectionSharerInput } input - The ToggleTextSelectionSharerInput
-   * 
+   *
    * @returns - The publication details
-  */
+   */
   async toggleTextSelectionSharer(input: ToggleTextSelectionSharerInput) {
-    const res = await this.makeRequest<{ toggleTextSelectionSharer: ToggleTextSelectionSharerPayload }>(
-      'toggleTextSelectionSharer',
-      TOGGLE_TEXT_SELECTION_SHARER_MUTATION,
-      { input },
-    );
+    const res = await this.makeRequest<{
+      toggleTextSelectionSharer: ToggleTextSelectionSharerPayload;
+    }>('toggleTextSelectionSharer', TOGGLE_TEXT_SELECTION_SHARER_MUTATION, {
+      input,
+    });
     return res.toggleTextSelectionSharer.publication;
   }
 
   /**
    * Toggle GPTBotCrawlingMutation
-   * 
+   *
    * @param {ToggleGPTBotCrawlingInput} input - The toggleGPTBotCrawlingInput
-   * 
+   *
    * @returns - The publication details
-  */
+   */
   async toggleGPTBotCrawling(input: ToggleGptBotCrawlingInput) {
-    const res = await this.makeRequest<{ toggleGPTBotCrawlingInput: ToggleGptBotCrawlingPayload }>(
-      'toggleGPTBotCrawlingInput',
-      TOGGLE_GPT_BOT_CRAWLING_MUTATION,
-      { input }
-    )
-    return res.toggleGPTBotCrawlingInput.publication
+    const res = await this.makeRequest<{
+      toggleGPTBotCrawlingInput: ToggleGptBotCrawlingPayload;
+    }>('toggleGPTBotCrawlingInput', TOGGLE_GPT_BOT_CRAWLING_MUTATION, {
+      input,
+    });
+    return res.toggleGPTBotCrawlingInput.publication;
   }
-
-  
 }

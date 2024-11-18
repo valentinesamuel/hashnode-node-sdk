@@ -198,10 +198,10 @@ export class UserManager extends BaseManager {
   }
 
   /**
-   * 
+   *
    * ===================MUTATIONS===================
-   * 
-  */
+   *
+   */
 
   /**
    * Toggles the follow status of a user.

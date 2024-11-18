@@ -1,4 +1,15 @@
-import type { PublishPostInput, AddPostToSeriesInput, UpdatePostInput, RemovePostInput, LikePostInput, LikePostPayload, RemovePostPayload, UpdatePostPayload, AddPostToSeriesPayload, PublishPostPayload } from './../../generated/gqlQueryTypes';
+import type {
+  PublishPostInput,
+  AddPostToSeriesInput,
+  UpdatePostInput,
+  RemovePostInput,
+  LikePostInput,
+  LikePostPayload,
+  RemovePostPayload,
+  UpdatePostPayload,
+  AddPostToSeriesPayload,
+  PublishPostPayload,
+} from './../../generated/gqlQueryTypes';
 import type { HashnodeSDKClient } from '../../client';
 import { BaseManager } from '../base.manager';
 import {
@@ -201,93 +212,91 @@ export class PostManager extends BaseManager {
 
   /**
    * Publish a post
-   * 
+   *
    * @param {PublishPostInput} input - The post to be published
-   * 
+   *
    * @returns The new post
-  */
+   */
   async publishPost(input: PublishPostInput) {
     const res = await this.makeRequest<{ publishedpost: PublishPostPayload }>(
       'publishPost',
       PUBLISH_POST_MUTATION,
       {
-        input
-      }
-    )
-    return res.publishedpost.post
+        input,
+      },
+    );
+    return res.publishedpost.post;
   }
 
   /**
    * Add a post to a series
-   * 
+   *
    * @param {AddPostToSeriesInput} input - The input of the post to be added to the series
-   * 
+   *
    * @return The series
-  */
+   */
   async addPostToSeries(input: AddPostToSeriesInput) {
     const res = await this.makeRequest<{ series: AddPostToSeriesPayload }>(
       'addPostToSeries',
       ADD_POST_TO_SERIES_MUTATION,
       {
-        input
-      }
-    )
-    return res.series
+        input,
+      },
+    );
+    return res.series;
   }
 
   /**
    * Updates a post
-   * 
+   *
    * @param {UpdatePostInput} input - The input of the post to be updated
-   * 
+   *
    * @return The updated post
-  */
+   */
   async updatePost(input: UpdatePostInput) {
     const res = await this.makeRequest<{ updatedPost: UpdatePostPayload }>(
       'updatePost',
       UPDATE_POST_MUTATION,
       {
-        input
-      }
-    )
-    return res.updatedPost
+        input,
+      },
+    );
+    return res.updatedPost;
   }
 
   /**
    * Remove a post
-   * 
+   *
    * @param {RemovePostInput} input - The input of the post to be removed
-   * 
+   *
    * @return The removed post
-  */
+   */
   async removePost(input: RemovePostInput) {
     const res = await this.makeRequest<{ removedPost: RemovePostPayload }>(
       'removePost',
       REMOVE_POST_MUTATION,
       {
-        input
-      }
-    )
-    return res.removedPost
+        input,
+      },
+    );
+    return res.removedPost;
   }
 
   /**
    * Like a post
-   * 
+   *
    * @param {LikePostInput} input - The input of the post to be liked
-   * 
+   *
    * @return The liked post
-  */
+   */
   async likePost(input: LikePostInput) {
     const res = await this.makeRequest<{ likedPost: LikePostPayload }>(
       'likePost',
       LIKE_POST_MUTATION,
       {
-        input
-      }
-    )
-    return res.likedPost
+        input,
+      },
+    );
+    return res.likedPost;
   }
-
-
 }

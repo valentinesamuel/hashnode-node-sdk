@@ -5,6 +5,8 @@ import { MiscellaneousManager } from './managers/misc/misc.manager';
 import { PostManager } from './managers/posts/post.manager';
 import { PublicationManager } from './managers/publication/publication.manager';
 import { UserManager } from './managers/user/user.manager';
+import { CommentManager } from './managers/comment/comment.manager';
+import { WebhookManager } from './managers/webhook/webhook.manager';
 
 interface ClientOptions {
   apiKey: string;
@@ -62,6 +64,16 @@ export class HashnodeSDKClient {
   public readonly postManager: PostManager;
 
   /**
+   * The manager for managing comment related operations
+   */
+  public readonly commentManger: CommentManager;
+
+  /**
+   * The manager for managing webhook related operations
+   */
+  public readonly webhookManager: WebhookManager;
+
+  /**
    * Creates an instance of HashnodeSDKClient.
    *
    * @param options - The options for configuring the client.
@@ -83,6 +95,8 @@ export class HashnodeSDKClient {
     this.documentationProjectManager = new DocumentationProjectManager(this);
     this.publicationManager = new PublicationManager(this);
     this.postManager = new PostManager(this);
+    this.commentManger = new CommentManager(this);
+    this.webhookManager = new WebhookManager(this);
   }
 
   /**

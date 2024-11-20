@@ -444,7 +444,7 @@ export class PublicationManager extends BaseManager {
    * @returns Promise containing the redirected post data
    */
   async getPublicationRedirectedPost(id: string, host: string, slug: string) {
-    const res = await this.makeRequest<{ publicatin: Publication }>(
+    const res = await this.makeRequest<{ publication: Publication }>(
       'getPublicationRedirectedPost',
       GET_PUBLICATION_REDIRECTED_POST_QUERY,
       {
@@ -453,7 +453,7 @@ export class PublicationManager extends BaseManager {
         slug,
       },
     );
-    return res.publicatin.redirectedPost;
+    return res.publication.redirectedPost;
   }
 
   /**
@@ -563,7 +563,7 @@ export class PublicationManager extends BaseManager {
   /**
    * Toggle allowContributorEdits
    *
-   * @param {ToggleAlloqContrinutorEditsInput} input - The ToggleAlloqContrinutorEditsInput!
+   * @param {ToggleAllowContributorEditsInput} input - The ToggleAllowqContrinutorEditsInput!
    *
    * @returns The publication details.
    */
@@ -595,7 +595,7 @@ export class PublicationManager extends BaseManager {
   /**
    * Toggle GPTBotCrawlingMutation
    *
-   * @param {ToggleGPTBotCrawlingInput} input - The toggleGPTBotCrawlingInput
+   * @param { ToggleGptBotCrawlingInput } input - The toggleGPTBotCrawlingInput
    *
    * @returns - The publication details
    */

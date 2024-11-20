@@ -3,7 +3,7 @@
 A powerful and flexible Node.js SDK for interacting with the Hashnode GraphQL API. This SDK provides comprehensive access to Hashnode's features including user management, publications, posts, documentation projects, and more.
 
 <div style="padding: 10px; background-color: #cfc42d; color: #000000; border-radius:5px; width:fit-content;">
-  <strong>&#9888;</strong> Only <i>queries</i> are supported as at this time. I am currently working on the <i>mutations</i> before i move on testing. 🫠🫠.
+  <strong>&#9888;</strong> Only <i>queries</i> are supported as at this time. I am currently working on the <i>mutations</i> before I move on testing. 🫠🫠.
 </div>
 
 ## Table of Contents
@@ -109,7 +109,7 @@ const myPosts = await client.meManager.getMyPosts(
 
 // Check domain availability
 const isAvailable =
-  await client.domainAvailabilityManager.checkSubdomainAvailability('myblog');
+  await client.domainAvailabilityManager.checkSubdomainAvailability('my-blog');
 ```
 
 ## Core Concepts
@@ -244,7 +244,7 @@ Handles domain availability checks.
 ```typescript
 // Check subdomain availability
 const isAvailable =
-  await client.domainAvailabilityManager.checkSubdomainAvailability('myblog');
+  await client.domainAvailabilityManager.checkSubdomainAvailability('my-blog');
 
 // Check custom domain
 const isDomainAvailable =
@@ -288,8 +288,7 @@ const posts = await client.postManager.getPostComments(
 
 The SDK is built with TypeScript and provides comprehensive type definitions:
 
-```typescript
-// Complete type definitions for:
+```text
 - Client configuration
 - API responses
 - Manager methods
@@ -299,7 +298,7 @@ The SDK is built with TypeScript and provides comprehensive type definitions:
 
 ### Rate Limiting
 
-The SDK respects Hashnode's API rate limits. Query users are allowed to send up to 20k requests per minute. While Mutations users can send up to 500 requests per per minute.
+The SDK respects Hashnode's API rate limits. Query users are allowed to send up to 20k requests per minute. While Mutations users can send up to 500 requests per minute.
 
 - Error Code: `TOO_MANY_REQUESTS`
 - Handling:

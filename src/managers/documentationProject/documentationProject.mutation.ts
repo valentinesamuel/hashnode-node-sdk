@@ -439,3 +439,423 @@ export const UPDATE_DOCUMENTATION_LINK_MUTATION = gql`
     }
   }
 `;
+
+export const CREATE_DOCUMENTATION_PROJECT = gql`
+  mutation createDocumentationProjectMutation(
+    $input: CreateDocumentationProjectInput!
+  ) {
+    createDocumentationProject(input: $input) {
+      project {
+        id
+        name
+        description
+        settings {
+          isRobotsAllowed
+          isHashnodeLoginAllowed
+          isHeadless
+        }
+        links {
+          twitter
+          instagram
+          github
+          website
+          hashnode
+          youtube
+          dailydev
+          linkedin
+          mastodon
+          githubRepository
+        }
+        createdAt
+        updatedAt
+        appearance {
+          logoUrl
+          logoDarkThemeUrl
+          favIconUrl
+          primaryColor
+          defaultDocsTheme
+          getStarted {
+            label
+            url
+          }
+          customScript
+        }
+        integrations {
+          fbPixelID
+          hotjarSiteID
+          gaTrackingID
+          gTagManagerID
+          intercomID
+          metaTags
+        }
+        features {
+          collaboration {
+            isEnabled
+          }
+          ghSync {
+            isEnabled
+          }
+          versioning {
+            isEnabled
+          }
+        }
+        url
+        owner {
+          id
+          username
+          name
+          bio {
+            markdown
+          }
+          profilePicture
+          socialMediaLinks {
+            website
+            github
+            twitter
+            instagram
+            facebook
+            stackoverflow
+            linkedin
+            youtube
+          }
+          followersCount
+          followingsCount
+          tagline
+          following
+          followsBack
+        }
+        subscription {
+          status
+          productName
+          nextBillingCycle
+          maxSeats
+        }
+        ai {
+          prompts {
+            id
+            prompt
+            createdAt
+          }
+          settings {
+            isSearchEnabled
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const UPDATE_DOCUMENTATION_GENERAL_SETTINGS = gql`
+  mutation updateDocumentationGeneralSettingsMutation(
+    $input: UpdateDocumentationGeneralSettingsInput!
+  ) {
+    updateDocumentationGeneralSettings(input: $input) {
+      project {
+        id
+        name
+        description
+        settings {
+          isRobotsAllowed
+          isHashnodeLoginAllowed
+          isHeadless
+        }
+        links {
+          twitter
+          instagram
+          github
+          website
+          hashnode
+          youtube
+          dailydev
+          linkedin
+          mastodon
+          githubRepository
+        }
+        createdAt
+        updatedAt
+        appearance {
+          logoUrl
+          logoDarkThemeUrl
+          favIconUrl
+          primaryColor
+          defaultDocsTheme
+          getStarted {
+            label
+            url
+          }
+          customScript
+        }
+        integrations {
+          fbPixelID
+          hotjarSiteID
+          gaTrackingID
+          gTagManagerID
+          intercomID
+          metaTags
+        }
+        features {
+          collaboration {
+            isEnabled
+          }
+          ghSync {
+            isEnabled
+          }
+          versioning {
+            isEnabled
+          }
+        }
+        url
+        owner {
+          id
+          username
+          name
+          bio {
+            markdown
+          }
+          profilePicture
+          socialMediaLinks {
+            website
+            github
+            twitter
+            instagram
+            facebook
+            stackoverflow
+            linkedin
+            youtube
+          }
+          followersCount
+          followingsCount
+          tagline
+          following
+          followsBack
+        }
+        subscription {
+          status
+          productName
+          nextBillingCycle
+          maxSeats
+        }
+        ai {
+          prompts {
+            id
+            prompt
+            createdAt
+          }
+          settings {
+            isSearchEnabled
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const UPDATE_DOCUMENTATION_INTEGRATIONS = gql`
+  mutation updateDocumentationIntegrationsMutation(
+    $input: UpdateDocumentationIntegrationsInput!
+  ) {
+    updateDocumentationIntegrations(input: $input) {
+      project {
+        id
+        name
+        description
+        settings {
+          isRobotsAllowed
+          isHashnodeLoginAllowed
+          isHeadless
+        }
+        links {
+          twitter
+          instagram
+          github
+          website
+          hashnode
+          youtube
+          dailydev
+          linkedin
+          mastodon
+          githubRepository
+        }
+        createdAt
+        updatedAt
+        appearance {
+          logoUrl
+          logoDarkThemeUrl
+          favIconUrl
+          primaryColor
+          defaultDocsTheme
+          getStarted {
+            label
+            url
+          }
+          customScript
+        }
+        integrations {
+          fbPixelID
+          hotjarSiteID
+          gaTrackingID
+          gTagManagerID
+          intercomID
+          metaTags
+        }
+        features {
+          collaboration {
+            isEnabled
+          }
+          ghSync {
+            isEnabled
+          }
+          versioning {
+            isEnabled
+          }
+        }
+        url
+        owner {
+          id
+          username
+          name
+          bio {
+            markdown
+          }
+          profilePicture
+          socialMediaLinks {
+            website
+            github
+            twitter
+            instagram
+            facebook
+            stackoverflow
+            linkedin
+            youtube
+          }
+          followersCount
+          followingsCount
+          tagline
+          following
+          followsBack
+        }
+        subscription {
+          status
+          productName
+          nextBillingCycle
+          maxSeats
+        }
+        ai {
+          prompts {
+            id
+            prompt
+            createdAt
+          }
+          settings {
+            isSearchEnabled
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const UPDATE_DOCUMENTATION_APPEARANCE = gql`
+  mutation updateDocumentationAppearanceMutation(
+    $input: UpdateDocumentationAppearanceInput!
+  ) {
+    updateDocumentationAppearance(input: $input) {
+      project {
+        id
+        name
+        description
+        settings {
+          isRobotsAllowed
+          isHashnodeLoginAllowed
+          isHeadless
+        }
+        links {
+          twitter
+          instagram
+          github
+          website
+          hashnode
+          youtube
+          dailydev
+          linkedin
+          mastodon
+          githubRepository
+        }
+        createdAt
+        updatedAt
+        appearance {
+          logoUrl
+          logoDarkThemeUrl
+          favIconUrl
+          primaryColor
+          defaultDocsTheme
+          getStarted {
+            label
+            url
+          }
+          customScript
+        }
+        integrations {
+          fbPixelID
+          hotjarSiteID
+          gaTrackingID
+          gTagManagerID
+          intercomID
+          metaTags
+        }
+        features {
+          collaboration {
+            isEnabled
+          }
+          ghSync {
+            isEnabled
+          }
+          versioning {
+            isEnabled
+          }
+        }
+        url
+        owner {
+          id
+          username
+          name
+          bio {
+            markdown
+          }
+          profilePicture
+          socialMediaLinks {
+            website
+            github
+            twitter
+            instagram
+            facebook
+            stackoverflow
+            linkedin
+            youtube
+          }
+          followersCount
+          followingsCount
+          tagline
+          following
+          followsBack
+        }
+        subscription {
+          status
+          productName
+          nextBillingCycle
+          maxSeats
+        }
+        ai {
+          prompts {
+            id
+            prompt
+            createdAt
+          }
+          settings {
+            isSearchEnabled
+          }
+        }
+      }
+    }
+  }
+`;

@@ -19,6 +19,8 @@ import {
 import type {
   CreateDocumentationPageDraftInput,
   CreateDocumentationPageDraftPayload,
+  CreateDocumentationProjectInput,
+  CreateDocumentationProjectPayload,
   CreateDocumentationSectionInput,
   CreateDocumentationSectionPayload,
   DocumentationProject,
@@ -43,6 +45,12 @@ import type {
   SaveDocumentationPageDraftContentPayload,
   SetDocumentationSidebarItemVisibilityInput,
   SetDocumentationSidebarItemVisibilityPayload,
+  UpdateDocumentationAppearanceInput,
+  UpdateDocumentationAppearancePayload,
+  UpdateDocumentationGeneralSettingsInput,
+  UpdateDocumentationGeneralSettingsPayload,
+  UpdateDocumentationIntegrationsInput,
+  UpdateDocumentationIntegrationsPayload,
   UpdateDocumentationPageSettingsInput,
   UpdateDocumentationPageSettingsPayload,
   UpdateDocumentationSectionInput,
@@ -50,6 +58,7 @@ import type {
 } from '../../generated/gqlQueryTypes';
 import {
   CREATE_DOCUMENTATION_PAGE_DRAFT,
+  CREATE_DOCUMENTATION_PROJECT,
   CREATE_DOCUMENTATION_SECTION_MUTATION,
   MOVE_DOCUMENTATION_SIDEBAR_ITEM_MUTATION,
   PUBLISH_DOCUMENTATION_PAGE_DRAFT,
@@ -57,6 +66,9 @@ import {
   RENAME_DOCUMENTATION_SIDEBAR_ITEM_MUTATION,
   SAVE_DOCUMENTATION_PAGE_DRAFT_CONTENT,
   SET_DOCUMENTATION_SIDEBAR_ITEM_VISIBILITY_MUTATION,
+  UPDATE_DOCUMENTATION_APPEARANCE,
+  UPDATE_DOCUMENTATION_GENERAL_SETTINGS,
+  UPDATE_DOCUMENTATION_INTEGRATIONS,
   UPDATE_DOCUMENTATION_PAGE_SETTINGS,
   UPDATE_DOCUMENTATION_SECTION_MUTATION,
 } from './documentationProject.mutation';
@@ -579,5 +591,79 @@ export class DocumentationProjectManager extends BaseManager {
       input,
     });
     return res.documentation.page;
+  }
+
+  /**
+   * Creates a documentation project
+   *
+   * @param input - The input.
+   *
+   * @returns The documentation project.
+   */
+  async createDocumentationProject(input: CreateDocumentationProjectInput) {
+    const res = await this.makeRequest<{
+      documentation: CreateDocumentationProjectPayload;
+    }>('createDocumentationProject', CREATE_DOCUMENTATION_PROJECT, {
+      input,
+    });
+    return res.documentation.project;
+  }
+
+  /**
+   * Updates a documentation general settings
+   *
+   * @param input - The input.
+   *
+   * @returns The documentation project.
+   */
+  async updateDocumentationGeneralSettings(
+    input: UpdateDocumentationGeneralSettingsInput,
+  ) {
+    const res = await this.makeRequest<{
+      documentation: UpdateDocumentationGeneralSettingsPayload;
+    }>(
+      'updateDocumentationGeneralSettings',
+      UPDATE_DOCUMENTATION_GENERAL_SETTINGS,
+      {
+        input,
+      },
+    );
+    return res.documentation.project;
+  }
+
+  /**
+   * Updates documentation integrations
+   *
+   * @param input - The input.
+   *
+   * @returns The documentation project.
+   */
+  async updateDocumentationIntegrations(
+    input: UpdateDocumentationIntegrationsInput,
+  ) {
+    const res = await this.makeRequest<{
+      documentation: UpdateDocumentationIntegrationsPayload;
+    }>('updateDocumentationIntegrations', UPDATE_DOCUMENTATION_INTEGRATIONS, {
+      input,
+    });
+    return res.documentation.project;
+  }
+
+  /**
+   * Updates documentation appearance
+   *
+   * @param input - The input.
+   *
+   * @returns The documentation project.
+   */
+  async updateDocumentationAppearance(
+    input: UpdateDocumentationAppearanceInput,
+  ) {
+    const res = await this.makeRequest<{
+      documentation: UpdateDocumentationAppearancePayload;
+    }>('updateDocumentationAppearance', UPDATE_DOCUMENTATION_APPEARANCE, {
+      input,
+    });
+    return res.documentation.project;
   }
 }

@@ -289,6 +289,7 @@ export const GET_DOCUMENTATION_PROJECT_GUIDES_QUERY = gql`
     }
   }
 `;
+
 export const GET_DOCUMENTATION_PROJECT_PUBLISHED_GUIDE_QUERY = gql`
   query getDocumentationProjectPublishedGuide($id: ID, $slug: String) {
     documentationProject(id: $id) {

@@ -4,6 +4,7 @@ import {
   GET_DOCUMENTATION_PROJECT_CUSTOM_PAGE_QUERY,
   GET_DOCUMENTATION_PROJECT_CUSTOM_PAGES,
   GET_DOCUMENTATION_PROJECT_DEFAULT_GUIDE_QUERY,
+  GET_DOCUMENTATION_PROJECT_GUIDE_QUERY,
   GET_DOCUMENTATION_PROJECT_GUIDES_QUERY,
   GET_DOCUMENTATION_PROJECT_NAVIGATION_QUERY,
   GET_DOCUMENTATION_PROJECT_PENDING_INVITES,
@@ -12,12 +13,19 @@ import {
   GET_DOCUMENTATION_PROJECT_QUERY,
   GET_DOCUMENTATION_PROJECT_V2_MEMBER_QUERY,
   GET_DOCUMENTATION_PROJECT_VIEWS_QUERY,
+  GET_DOCUMENTATION_PROJECT_VISITORS_QUERY,
   SEARCH_DOCUMENTATION_PROJECT_USERS_QUERY,
 } from './documenationProject.queries';
 import type {
+  CreateDocumentationPageDraftInput,
+  CreateDocumentationPageDraftPayload,
+  CreateDocumentationSectionInput,
+  CreateDocumentationSectionPayload,
   DocumentationProject,
   DocumentationProjectMemberConnectionFilter,
   DocumentationProjectSearchUsersInput,
+  MoveDocumentationSidebarItemInput,
+  MoveDocumentationSidebarItemPayload,
   ProjectViewsFilter,
   ProjectViewsGroupBy,
   ProjectViewsOptions,
@@ -25,7 +33,33 @@ import type {
   ProjectVisitorsFilter,
   ProjectVisitorsGroupBy,
   ProjectVisitorsOptions,
+  PublishDocumentationPageDraftInput,
+  PublishDocumentationPageDraftPayload,
+  RemoveDocumentationSidebarItemInput,
+  RemoveDocumentationSidebarItemPayload,
+  RenameDocumentationSidebarItemInput,
+  RenameDocumentationSidebarItemPayload,
+  SaveDocumentationPageDraftContentInput,
+  SaveDocumentationPageDraftContentPayload,
+  SetDocumentationSidebarItemVisibilityInput,
+  SetDocumentationSidebarItemVisibilityPayload,
+  UpdateDocumentationPageSettingsInput,
+  UpdateDocumentationPageSettingsPayload,
+  UpdateDocumentationSectionInput,
+  UpdateDocumentationSectionPayload,
 } from '../../generated/gqlQueryTypes';
+import {
+  CREATE_DOCUMENTATION_PAGE_DRAFT,
+  CREATE_DOCUMENTATION_SECTION_MUTATION,
+  MOVE_DOCUMENTATION_SIDEBAR_ITEM_MUTATION,
+  PUBLISH_DOCUMENTATION_PAGE_DRAFT,
+  REMOVE_DOCUMENTATION_SIDEBAR_ITEM_MUTATION,
+  RENAME_DOCUMENTATION_SIDEBAR_ITEM_MUTATION,
+  SAVE_DOCUMENTATION_PAGE_DRAFT_CONTENT,
+  SET_DOCUMENTATION_SIDEBAR_ITEM_VISIBILITY_MUTATION,
+  UPDATE_DOCUMENTATION_PAGE_SETTINGS,
+  UPDATE_DOCUMENTATION_SECTION_MUTATION,
+} from './documentationProject.mutation';
 
 /**
  * Manages documentation project-related operations in the Hashnode SDK.
@@ -158,7 +192,7 @@ export class DocumentationProjectManager extends BaseManager {
   ) {
     const res = await this.makeRequest<{
       documentationProject: DocumentationProject;
-    }>('getDocumentationProjectGuide', GET_DOCUMENTATION_PROJECT_QUERY, {
+    }>('getDocumentationProjectGuide', GET_DOCUMENTATION_PROJECT_GUIDE_QUERY, {
       id: documentationProjectId,
       slug,
     });
@@ -191,7 +225,7 @@ export class DocumentationProjectManager extends BaseManager {
    * @param documentationProjectId - The ID of the documentation project.
    * @param slug - The slug/URL identifier of the guide.
    *
-   * @returns {Promise<PublishedGuide>} A promise that resolves with the published guide data.
+   * @returns {Promise<PublishedGuide} A promise that resolves with the published guide data.
    */
   async getDocumentationProjectPublishedGuide(
     documentationProjectId: string,
@@ -308,14 +342,18 @@ export class DocumentationProjectManager extends BaseManager {
   ) {
     const res = await this.makeRequest<{
       documentationProject: DocumentationProject;
-    }>('getDocumentationProjectViews', GET_DOCUMENTATION_PROJECT_VIEWS_QUERY, {
-      id: documentationProjectId,
-      first,
-      after,
-      filter,
-      groupBy,
-      options,
-    });
+    }>(
+      'getDocumentationProjectViews',
+      GET_DOCUMENTATION_PROJECT_VISITORS_QUERY,
+      {
+        id: documentationProjectId,
+        first,
+        after,
+        filter,
+        groupBy,
+        options,
+      },
+    );
     return res.documentationProject.analytics.visitors;
   }
 
@@ -353,5 +391,193 @@ export class DocumentationProjectManager extends BaseManager {
       { input },
     );
     return res.documentationProject.searchUsers;
+  }
+
+  /**
+   * =================MUTATIONS=================
+   * */
+
+  /**
+   * Move documentation sidebar project item
+   *
+   * @param input - The input.
+   *
+   * @returns  The documentation sidebar project item.
+   */
+  async moveDocumentationSidebarItem(input: MoveDocumentationSidebarItemInput) {
+    const res = await this.makeRequest<{
+      documentationSidebar: MoveDocumentationSidebarItemPayload;
+    }>(
+      'moveDocumentationSidebarItem',
+      MOVE_DOCUMENTATION_SIDEBAR_ITEM_MUTATION,
+      { input },
+    );
+    return res.documentationSidebar.guide;
+  }
+
+  /**
+   * Set documentation sidebar project item visibility
+   *
+   * @param input - The input.
+   *
+   * @returns The documentation sidebar project item.
+   */
+  async setDocumentationSidebarItemVisibility(
+    input: SetDocumentationSidebarItemVisibilityInput,
+  ) {
+    const res = await this.makeRequest<{
+      documentationSidebar: SetDocumentationSidebarItemVisibilityPayload;
+    }>(
+      'setDocumentationSidebarItemVisibility',
+      SET_DOCUMENTATION_SIDEBAR_ITEM_VISIBILITY_MUTATION,
+      { input },
+    );
+    return res.documentationSidebar.guide;
+  }
+
+  /**
+   * Rename documentation sidebar project item
+   *
+   * @param input - The input.
+   *
+   * @returns The documentation sidebar project item.
+   */
+  async renameDocumentationSidebarItem(
+    input: RenameDocumentationSidebarItemInput,
+  ) {
+    const res = await this.makeRequest<{
+      documentationSidebar: RenameDocumentationSidebarItemPayload;
+    }>(
+      'renameDocumentationSidebarItem',
+      RENAME_DOCUMENTATION_SIDEBAR_ITEM_MUTATION,
+      { input },
+    );
+    return res.documentationSidebar.guide;
+  }
+
+  /**
+   * Remove documentation sidebar project item
+   *
+   * @param input - The input.
+   *
+   * @returns The documentation sidebar project item.
+   */
+  async removeDocumentationSidebarItem(
+    input: RemoveDocumentationSidebarItemInput,
+  ) {
+    const res = await this.makeRequest<{
+      documentationSidebar: RemoveDocumentationSidebarItemPayload;
+    }>(
+      'removeDocumentationSidebarItem',
+      REMOVE_DOCUMENTATION_SIDEBAR_ITEM_MUTATION,
+      { input },
+    );
+    return res.documentationSidebar.guide;
+  }
+
+  /**
+   * Create a section in a documentation guide
+   *
+   * @param input - The input.
+   *
+   * @returns The documentation guide.
+   */
+  async createDocumentationSection(input: CreateDocumentationSectionInput) {
+    const res = await this.makeRequest<{
+      documentation: CreateDocumentationSectionPayload;
+    }>('createDocumentationSection', CREATE_DOCUMENTATION_SECTION_MUTATION, {
+      input,
+    });
+    return res.documentation.guide;
+  }
+
+  /**
+   * Update a section in a documentation guide
+   *
+   * @param input - The input.
+   *
+   * @returns The documentation guide.
+   */
+  async updateDocumentationSection(input: UpdateDocumentationSectionInput) {
+    const res = await this.makeRequest<{
+      documentation: UpdateDocumentationSectionPayload;
+    }>('updateDocumentationSection', UPDATE_DOCUMENTATION_SECTION_MUTATION, {
+      input,
+    });
+    return res.documentation.guide;
+  }
+
+  /**
+   * Create a draft documentation guide
+   *
+   * @param input - The input.
+   *
+   * @returns The draft documentation guide.
+   */
+  async createDocumentationPageDraft(input: CreateDocumentationPageDraftInput) {
+    const res = await this.makeRequest<{
+      documentation: CreateDocumentationPageDraftPayload;
+    }>('createDocumentationPageDraft', CREATE_DOCUMENTATION_PAGE_DRAFT, {
+      input,
+    });
+    return res.documentation.guide;
+  }
+
+  /**
+   * Update a documentation page settings
+   *
+   * @param input - The input.
+   *
+   * @returns The draft documentation guide.
+   */
+  async updateDocumentationPageSettings(
+    input: UpdateDocumentationPageSettingsInput,
+  ) {
+    const res = await this.makeRequest<{
+      documentation: UpdateDocumentationPageSettingsPayload;
+    }>('updateDocumentationPageSettings', UPDATE_DOCUMENTATION_PAGE_SETTINGS, {
+      input,
+    });
+    return res.documentation.guide;
+  }
+
+  /**
+   * Save documentation page draft contents
+   *
+   * @param input - The input.
+   *
+   * @returns The draft documentation guide.
+   */
+  async saveDocumentationPageDraftContent(
+    input: SaveDocumentationPageDraftContentInput,
+  ) {
+    const res = await this.makeRequest<{
+      documentation: SaveDocumentationPageDraftContentPayload;
+    }>(
+      'saveDocumentationPageDraftContent',
+      SAVE_DOCUMENTATION_PAGE_DRAFT_CONTENT,
+      {
+        input,
+      },
+    );
+    return res.documentation.page;
+  }
+
+  /**
+   * Publish documentation page draft
+   *
+   * @param input - The input.
+   *
+   * @returns The draft documentation guide.
+   */
+  async publishDocumentationPageDraft(
+    input: PublishDocumentationPageDraftInput,
+  ) {
+    const res = await this.makeRequest<{
+      documentation: PublishDocumentationPageDraftPayload;
+    }>('publishDocumentationPageDraft', PUBLISH_DOCUMENTATION_PAGE_DRAFT, {
+      input,
+    });
+    return res.documentation.page;
   }
 }

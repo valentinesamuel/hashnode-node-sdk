@@ -2,18 +2,33 @@ import { BaseManager } from '../base.manager';
 import type { HashnodeSDKClient } from '../../client';
 import type {
   AddCommentInput,
-  AddCommentPayload, AddReplyInput, AddReplyPayload,
-  CommenterUserConnection, LikeCommentInput, LikeCommentPayload, LikeReplyInput, LikeReplyPayload,
+  AddCommentPayload,
+  AddReplyInput,
+  AddReplyPayload,
+  CommenterUserConnection,
+  LikeCommentInput,
+  LikeCommentPayload,
+  LikeReplyInput,
+  LikeReplyPayload,
   RemoveCommentInput,
-  RemoveCommentPayload, RemoveReplyInput, RemoveReplyPayload,
+  RemoveCommentPayload,
+  RemoveReplyInput,
+  RemoveReplyPayload,
   UpdateCommentInput,
-  UpdateCommentPayload, UpdateReplyInput, UpdateReplyPayload,
+  UpdateCommentPayload,
+  UpdateReplyInput,
+  UpdateReplyPayload,
 } from '../../generated/gqlQueryTypes';
 import { GET_TOP_COMMENTERS_QUERY } from './comment.queries';
 import {
-  ADD_COMMENT_MUTATION, ADD_REPLY_MUTATION, LIKE_COMMENT_MUTATION, LIKE_REPLY_MUTATION,
-  REMOVE_COMMENT_MUTATION, REMOVE_REPLY_MUTATION,
-  UPDATE_COMMENT_MUTATION, UPDATE_REPLY_MUTATION,
+  ADD_COMMENT_MUTATION,
+  ADD_REPLY_MUTATION,
+  LIKE_COMMENT_MUTATION,
+  LIKE_REPLY_MUTATION,
+  REMOVE_COMMENT_MUTATION,
+  REMOVE_REPLY_MUTATION,
+  UPDATE_COMMENT_MUTATION,
+  UPDATE_REPLY_MUTATION,
 } from './comment.mutations';
 
 /**

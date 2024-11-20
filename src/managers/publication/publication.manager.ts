@@ -563,7 +563,7 @@ export class PublicationManager extends BaseManager {
   /**
    * Toggle allowContributorEdits
    *
-   * @param {ToggleAllowContributorEditsInput} input - The ToggleAllowqContrinutorEditsInput!
+   * @param {ToggleAllowContributorEditsInput} input - The ToggleAllowContributorEditsInput!
    *
    * @returns The publication details.
    */

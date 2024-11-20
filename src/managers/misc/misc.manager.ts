@@ -1,8 +1,6 @@
 import { BaseManager } from '../base.manager';
 import type { HashnodeSDKClient } from '../../client';
-import {
-  GET_TAG_BY_SLUG_QUERY,
-} from './misc.queries';
+import { GET_TAG_BY_SLUG_QUERY } from './misc.queries';
 import type {
   FollowTagsInput,
   FollowTagsPayload,
@@ -26,8 +24,6 @@ export class MiscellaneousManager extends BaseManager {
   constructor(client: HashnodeSDKClient) {
     super(client, 'MiscellaneousManager');
   }
-
-
 
   /**
    * Returns tag details by its slug

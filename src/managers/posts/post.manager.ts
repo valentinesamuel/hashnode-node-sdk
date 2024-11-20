@@ -26,7 +26,17 @@ import type {
   RemoveReplyInput,
   RemoveReplyPayload,
   RestorePostPayload,
-  RestorePostInput, PublishDraftInput, PublishDraftPayload, CreateDraftInput, CreateDraftPayload,
+  RestorePostInput,
+  PublishDraftInput,
+  PublishDraftPayload,
+  CreateDraftInput,
+  CreateDraftPayload,
+  RescheduleDraftInput,
+  RescheduleDraftPayload,
+  ScheduleDraftInput,
+  ScheduleDraftPayload,
+  CancelScheduledDraftInput,
+  CancelScheduledDraftPayload,
 } from './../../generated/gqlQueryTypes';
 import type { HashnodeSDKClient } from '../../client';
 import { BaseManager } from '../base.manager';
@@ -50,11 +60,16 @@ import {
   GET_SCHEDULED_POST_QUERY,
 } from './post.queries';
 import {
-  ADD_POST_TO_SERIES_MUTATION, CREATE_DRAFT_MUTATION,
-  LIKE_POST_MUTATION, PUBLISH_DRAFT_MUTATION,
+  ADD_POST_TO_SERIES_MUTATION,
+  CANCEL_SCHEDULED_DRAFT_MUTATION,
+  CREATE_DRAFT_MUTATION,
+  LIKE_POST_MUTATION,
+  PUBLISH_DRAFT_MUTATION,
   PUBLISH_POST_MUTATION,
   REMOVE_POST_MUTATION,
+  RESCHEDULE_DRAFT_MUTATION,
   RESTORE_POST_MUTATION,
+  SCHEDULE_DRAFT_MUTATION,
   UPDATE_POST_MUTATION,
 } from './post.mutations';
 
@@ -377,4 +392,53 @@ export class PostManager extends BaseManager {
     return res.publishDraft.post;
   }
 
+  /**
+   * Reschedule a draft
+   *
+   * @param {RescheduleDraftInput} input - The input of the draft to be rescheduled
+   *
+   * @return The rescheduled draft
+   */
+  async rescheduleDraft(input: RescheduleDraftInput) {
+    const res = await this.makeRequest<{
+      rescheduelDraft: RescheduleDraftPayload;
+    }>('rescheduleDraft', RESCHEDULE_DRAFT_MUTATION, {
+      input,
+    });
+    return res.rescheduelDraft.scheduledPost;
+  }
+
+  /**
+   * Schedule a draft
+   *
+   * @param {ScheduleDraftInput} input - The input of the draft to be scheduled
+   *
+   * @return The scheduled draft
+   */
+  async scheduleDraft(input: ScheduleDraftInput) {
+    const res = await this.makeRequest<{ scheduelDraft: ScheduleDraftPayload }>(
+      'scheduleDraft',
+      SCHEDULE_DRAFT_MUTATION,
+      {
+        input,
+      },
+    );
+    return res.scheduelDraft.scheduledPost;
+  }
+
+  /**
+   * Cancel a scheduled draft
+   *
+   * @param {ScheduleDraftInput} input - The input of the scheduled draft to be cancelled
+   *
+   * @return The scheduled draft
+   */
+  async cancelScheduledDraft(input: CancelScheduledDraftInput) {
+    const res = await this.makeRequest<{
+      cancelledScheduledDraft: CancelScheduledDraftPayload;
+    }>('cancelScheduledDraft', CANCEL_SCHEDULED_DRAFT_MUTATION, {
+      input,
+    });
+    return res.cancelledScheduledDraft.scheduledPost;
+  }
 }

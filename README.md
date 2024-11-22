@@ -2,8 +2,8 @@
 
 A powerful and flexible Node.js SDK for interacting with the Hashnode GraphQL API. This SDK provides comprehensive access to Hashnode's features including user management, publications, posts, documentation projects, and more.
 
-<div style="padding: 10px; background-color: #cfc42d; color: #000000; border-radius:5px; width:fit-content;">
-  <strong>&#9888;</strong> Only <i>queries</i> are supported as at this time. I am currently working on the <i>mutations</i> before I move on testing. 🫠🫠.
+<div style="padding: 10px; background-color: #66cf2d; color: #000000; border-radius:5px; width:fit-content;">
+  <strong>&#x2705;</strong> Queries and mutations are now supported. I intend to move on testing. 🫠🫠.
 </div>
 
 ## Table of Contents
@@ -24,6 +24,9 @@ A powerful and flexible Node.js SDK for interacting with the Hashnode GraphQL AP
       - [UserManager](#usermanager)
       - [MeManager](#memanager)
       - [PostManager](#postmanager)
+      - [SeriesManager](#seriesmanager)
+      - [WebhookManager](#webhookmanager)
+      - [CommentManager](#commentmanager)
       - [PublicationManager](#publicationmanager)
       - [DocumentationProjectManager](#documentationprojectmanager)
       - [DomainAvailabilityManager](#domainavailabilitymanager)
@@ -37,7 +40,6 @@ A powerful and flexible Node.js SDK for interacting with the Hashnode GraphQL AP
   - [Contributing](#contributing)
     - [Development Setup](#development-setup)
     - [Code Style](#code-style)
-    - [Testing](#testing)
     - [Pull Request Process](#pull-request-process)
   - [Troubleshooting](#troubleshooting)
     - [Common Issues](#common-issues)
@@ -92,6 +94,9 @@ The SDK provides several managers for different API functionalities:
 - DocumentationProjectManager - Documentation management
 - DomainAvailabilityManager - Domain checks
 - MiscellaneousManager - Utility operations
+- CommentManager - Comment Operations
+- WebhookManager - Webhook operations
+- SeriesManager - Series operarions
 
 ### Quick Example
 
@@ -131,9 +136,10 @@ client.publicationManager;
 client.documentationProjectManager;
 client.domainAvailabilityManager;
 client.miscManager;
+client.seriesManager;
+client.webhookManager;
+client.commentManager
 ```
-
-I'll continue creating the detailed README.md, focusing on the API Reference section and beyond:
 
 ## API Reference
 
@@ -198,6 +204,65 @@ const comments = await client.postManager.getPostComments(
 
 // Get post likers
 const likers = await client.postManager.getPostLikers('postId', 10, null, {});
+```
+
+#### SeriesManager
+
+Handles series operations.
+
+```typescript
+// Create series
+const series = await client.seriesManager.createSeries({
+  name:'seriesName',
+  publicationId:'publicationId',
+  slug:'slug'
+});
+
+// remove series
+const series = await client.seriesManager.removeSeries({
+  id:'seriesid'
+}
+);
+```
+
+#### WebhookManager
+
+Handles webhook operations.
+
+```typescript
+// Create webhook
+const reply = await client.webhookManager.createWebhook({
+  event: 'event',
+  publicationId: 'publicationId',
+  secret: 'webhokSecret',
+  url: 'webhookUrl',
+});
+
+// Update webhook
+const updatedWebhook = await client.webhookManager.updateWebhook({
+  id:'webhookUrl'
+}
+);
+```
+
+#### CommentManager
+
+Handles comment operations.
+
+```typescript
+// Add reply
+const reply = await client.commentManager.addReply({
+  commentId: 'commentId',
+  content: 'Reply content',
+});
+
+// Update reply
+const reply = await client.commentManager.updateReply({
+  replyId: 'replyId',
+  contentMarkdown: '##Updated reply content',
+  commentId: 'commentId'
+}
+);
 ```
 
 #### PublicationManager
@@ -350,7 +415,7 @@ I am actively working on mutations
 - [x] Queries
 - [x] Error Types
 - [x] Manager Adapter
-- [ ] Mutations
+- [x] Mutations
 - [ ] Testing
 
 ## Contributing
@@ -383,14 +448,14 @@ npm run build
 - Follow existing code patterns
 - Document all methods with JSDoc comments
 
-### Testing
+<!-- ### Testing
 
 Run tests using:
 
 ```bash
 npm test        # Run all tests
 npm run test:watch  # Run tests in watch mode
-```
+``` -->
 
 ### Pull Request Process
 

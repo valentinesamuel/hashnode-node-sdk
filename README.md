@@ -138,7 +138,7 @@ client.domainAvailabilityManager;
 client.miscManager;
 client.seriesManager;
 client.webhookManager;
-client.commentManager
+client.commentManager;
 ```
 
 ## API Reference
@@ -213,16 +213,15 @@ Handles series operations.
 ```typescript
 // Create series
 const series = await client.seriesManager.createSeries({
-  name:'seriesName',
-  publicationId:'publicationId',
-  slug:'slug'
+  name: 'seriesName',
+  publicationId: 'publicationId',
+  slug: 'slug',
 });
 
 // remove series
 const series = await client.seriesManager.removeSeries({
-  id:'seriesid'
-}
-);
+  id: 'seriesid',
+});
 ```
 
 #### WebhookManager
@@ -240,9 +239,8 @@ const reply = await client.webhookManager.createWebhook({
 
 // Update webhook
 const updatedWebhook = await client.webhookManager.updateWebhook({
-  id:'webhookUrl'
-}
-);
+  id: 'webhookUrl',
+});
 ```
 
 #### CommentManager
@@ -260,9 +258,8 @@ const reply = await client.commentManager.addReply({
 const reply = await client.commentManager.updateReply({
   replyId: 'replyId',
   contentMarkdown: '##Updated reply content',
-  commentId: 'commentId'
-}
-);
+  commentId: 'commentId',
+});
 ```
 
 #### PublicationManager

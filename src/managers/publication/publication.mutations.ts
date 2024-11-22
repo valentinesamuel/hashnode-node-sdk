@@ -385,3 +385,226 @@ export const TOGGLE_GPT_BOT_CRAWLING_MUTATION = gql`
     }
   }
 `;
+
+export const INVITE_USERS_TO_PUBLICATION_MUTATION = gql`
+  mutation inviteUsersToPublicationMutation(
+    $input: InviteUsersToPublicationInput!
+  ) {
+    inviteUsersToPublication(input: $input) {
+      success
+      failedInvites {
+        email
+        username
+        errorMessage
+      }
+      successfulInviteCount
+    }
+  }
+`;
+
+export const REINVITE_USERS_TO_PUBLICATION_MUTATION = gql`
+  mutation reInviteUsersToPublicationMutation(
+    $input: ReinviteUserToPublicationInput!
+  ) {
+    reinviteUserToPublication(input: $input) {
+      success
+    }
+  }
+`;
+
+export const REVOKE_USER_INVITE_TO_PUBLICATION_MUTATION = gql`
+  mutation revokeUserInviteToPublicationMutation(
+    $input: RevokeUserInviteToPublicationInput!
+  ) {
+    revokeUserInviteToPublication(input: $input) {
+      success
+    }
+  }
+`;
+
+export const ACCEPT_INVITE_TO_PUBLICATION_MUTATION = gql`
+  mutation acceptInviteToPublicationMutation(
+    $input: AcceptInviteToPublicationInput!
+  ) {
+    acceptInviteToPublication(input: $input) {
+      success
+    }
+  }
+`;
+
+export const CHANGE_PUBLICATION_MEMBER_ROLE_MUTATION = gql`
+  mutation changePublicationMemberRoleMutation(
+    $input: ChangePublicationMemberRoleInput!
+  ) {
+    changePublicationMemberRole(input: $input) {
+      member {
+        id
+        user {
+          id
+          name
+          username
+          bio {
+            markdown
+          }
+          profilePicture
+          socialMediaLinks {
+            website
+            github
+            twitter
+            instagram
+            facebook
+            stackoverflow
+            linkedin
+            youtube
+          }
+          followersCount
+          followingsCount
+          tagline
+        }
+        role
+        privacyState
+      }
+    }
+  }
+`;
+
+export const REMOVE_PUBLICATION_MEMBER_MUTATION = gql`
+  mutation removePublicationMemberMutation(
+    $input: RemovePublicationMemberInput!
+  ) {
+    removePublicationMember(input: $input) {
+      member {
+        id
+        user {
+          id
+          name
+          username
+          bio {
+            markdown
+          }
+          profilePicture
+          socialMediaLinks {
+            website
+            github
+            twitter
+            instagram
+            facebook
+            stackoverflow
+            linkedin
+            youtube
+          }
+          followersCount
+          followingsCount
+          tagline
+        }
+        role
+        privacyState
+      }
+    }
+  }
+`;
+
+export const CREATE_ROLE_BASED_INVITE_FOR_PUBLICATION_MUTATION = gql`
+  mutation createRoleBasedInviteForPublicationMutation(
+    $input: CreateRoleBasedInviteForPublicationInput!
+  ) {
+    createRoleBasedInviteForPublication(input: $input) {
+      invite {
+        id
+        role
+        isUnlimitedCapacity
+        usedCapacity
+        capacity
+        inviteLink
+        createdAt
+        expiryDate
+      }
+    }
+  }
+`;
+
+export const UPDATE_ROLE_BASED_INVITE_MUTATION = gql`
+  mutation updateRoleBasedInviteMutation($input: UpdateRoleBasedInviteInput!) {
+    updateRoleBasedInvite(input: $input) {
+      invite {
+        id
+        role
+        isUnlimitedCapacity
+        usedCapacity
+        capacity
+        inviteLink
+        createdAt
+        expiryDate
+      }
+    }
+  }
+`;
+
+export const ACCEPT_ROLE_BASED_INVITE_MUTATON = gql`
+  mutation acceptRoleBasedInviteMutation($input: AcceptRoleBasedInviteInput!) {
+    acceptRoleBasedInvite(input: $input) {
+      success
+    }
+  }
+`;
+
+export const DELETE_ROLE_BASED_INVITE_MUTATION = gql`
+  mutation deleteRoleBasedInviteMutation($input: DeleteRoleBasedInviteInput!) {
+    deleteRoleBasedInvite(input: $input) {
+      invite {
+        id
+        role
+        isUnlimitedCapacity
+        usedCapacity
+        capacity
+        inviteLink
+        createdAt
+        expiryDate
+      }
+    }
+  }
+`;
+
+export const CHANGE_PUBLICATION_MEMBER_VISIBILITY_MUTATION = gql`
+  mutation changePublicationMemberVisibilityMutation(
+    $input: ChangePublicationMemberVisibilityInput!
+  ) {
+    changePublicationMemberVisibility(input: $input) {
+      member {
+        id
+        user {
+          id
+          name
+          username
+          bio {
+            markdown
+          }
+          profilePicture
+          socialMediaLinks {
+            website
+            github
+            twitter
+            instagram
+            facebook
+            stackoverflow
+            linkedin
+            youtube
+          }
+          followersCount
+          followingsCount
+          tagline
+        }
+        role
+        privacyState
+      }
+    }
+  }
+`;
+
+export const TOGGLE_ROLE_BASED_INVITE_LINKS_MUTATION = gql`
+  mutation toggleRoleBasedInviteLinksMutation($input: ID!) {
+    toggleRoleBasedInviteLinks(publicationId: $input) {
+      areRoleBasedInviteLinksActive
+    }
+  }
+`;

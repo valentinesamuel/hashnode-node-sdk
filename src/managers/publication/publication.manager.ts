@@ -1,6 +1,20 @@
 import type { HashnodeSDKClient } from '../../client';
 import { BaseManager } from '../base.manager';
 import type {
+  AcceptInviteToPublicationInput,
+  AcceptInviteToPublicationPayload,
+  AcceptRoleBasedInviteInput,
+  AcceptRoleBasedInvitePayload,
+  ChangePublicationMemberRoleInput,
+  ChangePublicationMemberRolePayload,
+  ChangePublicationMemberVisibilityInput,
+  ChangePublicationMemberVisibilityPayload,
+  CreateRoleBasedInviteForPublicationInput,
+  CreateRoleBasedInviteForPublicationPayload,
+  DeleteRoleBasedInviteInput,
+  DeleteRoleBasedInvitePayload,
+  InviteUsersToPublicationInput,
+  InviteUsersToPublicationPayload,
   Post,
   Publication,
   PublicationDraftConnectionFilter,
@@ -8,15 +22,24 @@ import type {
   PublicationSearchableDraftConnectionFilter,
   RecommendPublicationsInput,
   RecommendPublicationsPayload,
+  ReinviteUserToPublicationInput,
+  ReinviteUserToPublicationPayload,
+  RemovePublicationMemberInput,
+  RemovePublicationMemberPayload,
   RemoveRecommendationInput,
   RemoveRecommendationPayload,
+  RevokeUserInviteToPublicationInput,
+  RevokeUserInviteToPublicationPayload,
   SearchPostsOfPublicationFilter,
   ToggleAllowContributorEditsInput,
   ToggleAllowContributorEditsPayload,
   ToggleGptBotCrawlingInput,
   ToggleGptBotCrawlingPayload,
+  ToggleRoleBasedInviteLinksPayload,
   ToggleTextSelectionSharerInput,
   ToggleTextSelectionSharerPayload,
+  UpdateRoleBasedInviteInput,
+  UpdateRoleBasedInvitePayload,
 } from '../../generated/gqlQueryTypes';
 import {
   GET_ALL_PUBLICATION_DRAFTS_QUERY,
@@ -39,10 +62,22 @@ import {
   SEARCH_POSTS_OF_PUBLICATION,
 } from './publication.queries';
 import {
+  ACCEPT_INVITE_TO_PUBLICATION_MUTATION,
+  ACCEPT_ROLE_BASED_INVITE_MUTATON,
+  CHANGE_PUBLICATION_MEMBER_ROLE_MUTATION,
+  CHANGE_PUBLICATION_MEMBER_VISIBILITY_MUTATION,
+  CREATE_ROLE_BASED_INVITE_FOR_PUBLICATION_MUTATION,
+  DELETE_ROLE_BASED_INVITE_MUTATION,
+  INVITE_USERS_TO_PUBLICATION_MUTATION,
   RECOMMEND_PUBLICATIONS_MUTATION,
+  REINVITE_USERS_TO_PUBLICATION_MUTATION,
+  REMOVE_PUBLICATION_MEMBER_MUTATION,
+  REVOKE_USER_INVITE_TO_PUBLICATION_MUTATION,
   TOGGLE_ALLOW_CONTRIBUTOR_EDITS_MUTATION,
   TOGGLE_GPT_BOT_CRAWLING_MUTATION,
+  TOGGLE_ROLE_BASED_INVITE_LINKS_MUTATION,
   TOGGLE_TEXT_SELECTION_SHARER_MUTATION,
+  UPDATE_ROLE_BASED_INVITE_MUTATION,
 } from './publication.mutations';
 
 export class PublicationManager extends BaseManager {
@@ -606,5 +641,231 @@ export class PublicationManager extends BaseManager {
       input,
     });
     return res.toggleGPTBotCrawlingInput.publication;
+  }
+
+  /**
+   * Invite users to publication
+   *
+   * @param { InviteUsersToPublicationInput } input - The InviteUsersToPublicationInput
+   *
+   * @returns - The invited users
+   */
+  async inviteUsersToPublication(input: InviteUsersToPublicationInput) {
+    const res = await this.makeRequest<{
+      invitedUsers: InviteUsersToPublicationPayload;
+    }>('inviteUsersToPublication', INVITE_USERS_TO_PUBLICATION_MUTATION, {
+      input,
+    });
+    return res.invitedUsers;
+  }
+
+  /**
+   * Re invite users to publication
+   *
+   * @param { ReinviteUserToPublicationInput } input - The ReinviteUserToPublicationInput
+   *
+   * @returns - The operation status
+   */
+  async reInviteUsersToPublication(input: ReinviteUserToPublicationInput) {
+    const res = await this.makeRequest<{
+      invitedUsers: ReinviteUserToPublicationPayload;
+    }>('reInviteUsersToPublication', REINVITE_USERS_TO_PUBLICATION_MUTATION, {
+      input,
+    });
+    return res.invitedUsers.success;
+  }
+
+  /**
+   * Revoke users to publication
+   *
+   * @param { RevokeUserInviteToPublicationInput } input - The RevokeUserInviteToPublicationInput
+   *
+   * @returns - The operation status
+   */
+  async revokeUserInviteToPublication(
+    input: RevokeUserInviteToPublicationInput,
+  ) {
+    const res = await this.makeRequest<{
+      revokedInvite: RevokeUserInviteToPublicationPayload;
+    }>(
+      'revokeUserInviteToPublication',
+      REVOKE_USER_INVITE_TO_PUBLICATION_MUTATION,
+      {
+        input,
+      },
+    );
+    return res.revokedInvite.success;
+  }
+
+  /**
+   * Accept users invite to publication
+   *
+   * @param { AcceptInviteToPublicationInput } input - The AcceptInviteToPublicationInput
+   *
+   * @returns - The operation status
+   */
+  async acceptInviteToPublication(input: AcceptInviteToPublicationInput) {
+    const res = await this.makeRequest<{
+      acceptInvite: AcceptInviteToPublicationPayload;
+    }>('acceptInviteToPublication', ACCEPT_INVITE_TO_PUBLICATION_MUTATION, {
+      input,
+    });
+    return res.acceptInvite.success;
+  }
+
+  /**
+   * Change publication member role
+   *
+   * @param { ChangePublicationMemberRoleInput } input - The ChangePublicationMemberRoleInput
+   *
+   * @returns - The publication member
+   */
+  async changePublicationMemberRole(input: ChangePublicationMemberRoleInput) {
+    const res = await this.makeRequest<{
+      publicationMemberRole: ChangePublicationMemberRolePayload;
+    }>('changePublicationMemberRole', CHANGE_PUBLICATION_MEMBER_ROLE_MUTATION, {
+      input,
+    });
+    return res.publicationMemberRole.member;
+  }
+
+  /**
+   * Remove publication member
+   *
+   * @param { RemovePublicationMemberInput } input - The RemovePublicationMemberInput
+   *
+   * @returns - The publication member
+   */
+  async removePublicationMember(input: RemovePublicationMemberInput) {
+    const res = await this.makeRequest<{
+      publicationMember: RemovePublicationMemberPayload;
+    }>('removePublicationMember', REMOVE_PUBLICATION_MEMBER_MUTATION, {
+      input,
+    });
+    return res.publicationMember.member;
+  }
+
+  /**
+   * Create role based invite for publication
+   *
+   * @param { CreateRoleBasedInviteForPublicationInput } input - The CreateRoleBasedInviteForPublicationInput
+   *
+   * @returns - The invite
+   */
+  async createRoleBasedInviteForPublication(
+    input: CreateRoleBasedInviteForPublicationInput,
+  ) {
+    const res = await this.makeRequest<{
+      roleBasedInvite: CreateRoleBasedInviteForPublicationPayload;
+    }>(
+      'createRoleBasedInviteForPublication',
+      CREATE_ROLE_BASED_INVITE_FOR_PUBLICATION_MUTATION,
+      {
+        input,
+      },
+    );
+    return res.roleBasedInvite.invite;
+  }
+
+  /**
+   * Update role based invite for publication
+   *
+   * @param { UpdateRoleBasedInviteInput } input - The UpdateRoleBasedInviteInput
+   *
+   * @returns - The invite
+   */
+  async updateRoleBasedInviteForPublication(input: UpdateRoleBasedInviteInput) {
+    const res = await this.makeRequest<{
+      roleBasedInvite: UpdateRoleBasedInvitePayload;
+    }>(
+      'updateRoleBasedInviteForPublication',
+      UPDATE_ROLE_BASED_INVITE_MUTATION,
+      {
+        input,
+      },
+    );
+    return res.roleBasedInvite.invite;
+  }
+
+  /**
+   * Accept role based invite for publication
+   *
+   * @param { AcceptRoleBasedInviteInput } input - The AcceptRoleBasedInviteInput
+   *
+   * @returns - The invite
+   */
+  async acceptRoleBasedInviteForPublication(input: AcceptRoleBasedInviteInput) {
+    const res = await this.makeRequest<{
+      roleBasedInvite: AcceptRoleBasedInvitePayload;
+    }>(
+      'updateRoleBasedInviteForPublication',
+      ACCEPT_ROLE_BASED_INVITE_MUTATON,
+      {
+        input,
+      },
+    );
+    return res.roleBasedInvite.success;
+  }
+
+  /**
+   * Delete role based invite for publication
+   *
+   * @param { DeleteRoleBasedInviteInput } input - The DeleteRoleBasedInviteInput
+   *
+   * @returns - The invite
+   */
+  async deleteRoleBasedInviteForPublication(input: DeleteRoleBasedInviteInput) {
+    const res = await this.makeRequest<{
+      roleBasedInvite: DeleteRoleBasedInvitePayload;
+    }>(
+      'deleteRoleBasedInviteForPublication',
+      DELETE_ROLE_BASED_INVITE_MUTATION,
+      {
+        input,
+      },
+    );
+    return res.roleBasedInvite.invite;
+  }
+
+  /**
+   * Change publication member visibility
+   *
+   * @param { ChangePublicationMemberVisibilityInput } input - The ChangePublicationMemberVisibilityInput
+   *
+   * @returns - The operation status
+   */
+  async changePublicationMemberVisibility(
+    input: ChangePublicationMemberVisibilityInput,
+  ) {
+    const res = await this.makeRequest<{
+      visibility: ChangePublicationMemberVisibilityPayload;
+    }>(
+      'changePublicationMemberVisibility',
+      CHANGE_PUBLICATION_MEMBER_VISIBILITY_MUTATION,
+      {
+        input,
+      },
+    );
+    return res.visibility.member;
+  }
+
+  /**
+   * Toggle role based invite links
+   *
+   * @param { string } input - The string
+   *
+   * @returns - The operation status
+   */
+  async toggleRoleBasedInviteLinks(input: string) {
+    const res = await this.makeRequest<{
+      operation: ToggleRoleBasedInviteLinksPayload;
+    }>(
+      'ChangePublicationMemberVisibilityInput',
+      TOGGLE_ROLE_BASED_INVITE_LINKS_MUTATION,
+      {
+        input,
+      },
+    );
+    return res.operation.areRoleBasedInviteLinksActive;
   }
 }

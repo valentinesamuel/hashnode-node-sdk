@@ -1071,116 +1071,118 @@ export const REMOVE_DOCUMENTATION_PROJECT_MUTATION = gql`
 `;
 
 export const ADD_DOCUMENTATION_PROJECT_CUSTOM_DOMAIN_MUTATION = gql`
-    mutation addDocumentationProjectCustomDomainMutation($input: AddDocumentationProjectCustomDomainInput!) {
-        addDocumentationProjectCustomDomain(input: $input) {
-            project {
-                id
-                name
-                description
-                settings {
-                    isRobotsAllowed
-                    isHashnodeLoginAllowed
-                    isHeadless
-                }
-                links {
-                    twitter
-                    instagram
-                    github
-                    website
-                    hashnode
-                    youtube
-                    dailydev
-                    linkedin
-                    mastodon
-                    githubRepository
-                }
-                createdAt
-                updatedAt
-                appearance {
-                    logoUrl
-                    logoDarkThemeUrl
-                    favIconUrl
-                    primaryColor
-                    defaultDocsTheme
-                    getStarted {
-                        label
-                        url
-                    }
-                    customScript
-                }
-                integrations {
-                    fbPixelID
-                    hotjarSiteID
-                    gaTrackingID
-                    gTagManagerID
-                    intercomID
-                    metaTags
-                }
-                features {
-                    collaboration {
-                        isEnabled
-                    }
-                    ghSync {
-                        isEnabled
-                    }
-                    versioning {
-                        isEnabled
-                    }
-                }
-                url
-                owner {
-                    id
-                    username
-                    name
-                    bio {
-                        markdown
-                    }
-                    profilePicture
-                    socialMediaLinks {
-                        website
-                        github
-                        twitter
-                        instagram
-                        facebook
-                        stackoverflow
-                        linkedin
-                        youtube
-                    }
-                    followersCount
-                    followingsCount
-                    tagline
-                    following
-                    followsBack
-                }
-                subscription {
-                    status
-                    productName
-                    nextBillingCycle
-                    maxSeats
-                }
-                ai {
-                    prompts {
-                        id
-                        prompt
-                        createdAt
-                    }
-                    settings {
-                        isSearchEnabled
-                    }
-                }
-            }
-            dnsVerificationEntries {
-                type
-                name
-                value
-            }
-            wwwRedirectDnsVerificationEntries {
-                name
-                type
-                value
-            }
+  mutation addDocumentationProjectCustomDomainMutation(
+    $input: AddDocumentationProjectCustomDomainInput!
+  ) {
+    addDocumentationProjectCustomDomain(input: $input) {
+      project {
+        id
+        name
+        description
+        settings {
+          isRobotsAllowed
+          isHashnodeLoginAllowed
+          isHeadless
         }
+        links {
+          twitter
+          instagram
+          github
+          website
+          hashnode
+          youtube
+          dailydev
+          linkedin
+          mastodon
+          githubRepository
+        }
+        createdAt
+        updatedAt
+        appearance {
+          logoUrl
+          logoDarkThemeUrl
+          favIconUrl
+          primaryColor
+          defaultDocsTheme
+          getStarted {
+            label
+            url
+          }
+          customScript
+        }
+        integrations {
+          fbPixelID
+          hotjarSiteID
+          gaTrackingID
+          gTagManagerID
+          intercomID
+          metaTags
+        }
+        features {
+          collaboration {
+            isEnabled
+          }
+          ghSync {
+            isEnabled
+          }
+          versioning {
+            isEnabled
+          }
+        }
+        url
+        owner {
+          id
+          username
+          name
+          bio {
+            markdown
+          }
+          profilePicture
+          socialMediaLinks {
+            website
+            github
+            twitter
+            instagram
+            facebook
+            stackoverflow
+            linkedin
+            youtube
+          }
+          followersCount
+          followingsCount
+          tagline
+          following
+          followsBack
+        }
+        subscription {
+          status
+          productName
+          nextBillingCycle
+          maxSeats
+        }
+        ai {
+          prompts {
+            id
+            prompt
+            createdAt
+          }
+          settings {
+            isSearchEnabled
+          }
+        }
+      }
+      dnsVerificationEntries {
+        type
+        name
+        value
+      }
+      wwwRedirectDnsVerificationEntries {
+        name
+        type
+        value
+      }
     }
+  }
 `;
 
 export const MAP_DOCUMENTATION_PROJECT_CUSTOM_DOMAIN_WWW_REDIRECT_MUTATION = gql`
@@ -3003,40 +3005,40 @@ export const SYNC_DOCUMENTATION_API_DEFINITION_MUTATION = gql`
 `;
 
 export const CREATE_REDIRECTION_RULE_MUTATION = gql`
-    mutation createRedirectionRuleMutation($input: CreateRedirectionRuleInput!) {
-        createRedirectionRule(input: $input) {
-            redirectionRule {
-                id
-                type
-                source
-                destination
-            }
-        }
+  mutation createRedirectionRuleMutation($input: CreateRedirectionRuleInput!) {
+    createRedirectionRule(input: $input) {
+      redirectionRule {
+        id
+        type
+        source
+        destination
+      }
     }
-`
+  }
+`;
 
 export const UPDATE_REDIRECTION_RULE_MUTATION = gql`
   mutation updateRedirectionRuleMutation($input: UpdateRedirectionRuleInput!) {
-  updateRedirectionRule(input: $input) {
-    redirectionRule {
-      id
-      type
-      source
-      destination
+    updateRedirectionRule(input: $input) {
+      redirectionRule {
+        id
+        type
+        source
+        destination
+      }
     }
   }
-}
-`
+`;
 
 export const REMOVE_REDIRECTION_RULE_MUTATION = gql`
-    mutation removeRedirectionRuleMutation($input: RemoveRedirectionRuleInput!) {
-        removeRedirectionRule(input: $input) {
-            redirectionRule {
-                id
-                type
-                source
-                destination
-            }
-        }
+  mutation removeRedirectionRuleMutation($input: RemoveRedirectionRuleInput!) {
+    removeRedirectionRule(input: $input) {
+      redirectionRule {
+        id
+        type
+        source
+        destination
+      }
     }
-`
+  }
+`;
